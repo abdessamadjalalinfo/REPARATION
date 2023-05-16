@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('reparations', function (Blueprint $table) {
             $table->id();
+            $table->string("label")->default("none");
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->unsignedBigInteger('categorie_id');
+            $table->foreign('categorie_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('marque_id');
+            $table->foreign('marque_id')->references('id')->on('marques');
+            $table->unsignedBigInteger('model_id');
+            $table->foreign('model_id')->references('id')->on('models');
+            $table->string("code")->default("none");
+            $table->string("status")->default("reparation");
+            $table->string("description")->default("description none");
+            $table->string("prix")->default("0");
+            
             $table->timestamps();
         });
     }

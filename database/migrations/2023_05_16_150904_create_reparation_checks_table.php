@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('reparation_checks', function (Blueprint $table) {
             $table->id();
-            $table->string("path");
+            $table->string('description');
             $table->unsignedBigInteger('reparation_id');
             $table->foreign('reparation_id')->references('id')->on('reparations');
             $table->timestamps();
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('reparation_checks');
     }
 };

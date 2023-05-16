@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('reparation_compos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('reparation_id');
+            $table->foreign('reparation_id')->references('id')->on('reparations');
+            $table->unsignedBigInteger('component_id');
+            $table->foreign('component_id')->references('id')->on('components');
             $table->timestamps();
         });
     }

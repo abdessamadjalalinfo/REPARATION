@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('historiques', function (Blueprint $table) {
             $table->id();
+            $table->string("status");
+            $table->unsignedBigInteger('reparation_id');
+            $table->foreign('reparation_id')->references('id')->on('reparations');
             $table->timestamps();
         });
     }
