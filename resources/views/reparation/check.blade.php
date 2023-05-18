@@ -94,15 +94,27 @@
             <li class="list-group-item"><i class="fa-solid fa-address-card"></i>Adresse : {{$client->adresse}}</li>
         </ul>
         </div>
+        <br>
         <div class="card" style="">
             <div class="card-header">
                 Checking
             </div>
-        <ul class="list-group list-group-flush">
-            @foreach($checks as $check)
-            <li class="list-group-item"> <i style="color:green"class="fa-solid fa-check"></i>{{$check->description}}</li>
-            @endforeach
-        </ul>
+            <ul class="list-group list-group-flush">
+                @foreach($checks as $check)
+                <li class="list-group-item"> <i style="color:green"class="fa-solid fa-check"></i>{{$check->description}}</li>
+                @endforeach
+            </ul>
+        </div>
+        <br>
+        <div class="card" style="">
+            <div class="card-header">
+                Status
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach($status as $stat)
+                <li class="list-group-item"> <i style="color:green"class="fa-solid fa-check"></i>{{$stat->created_at}} :{{$stat->status}}</li>
+                @endforeach
+            </ul>
         </div>
     </div>
     <div class="col-6">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Component;
+use App\Models\Historique;
 use App\Models\Photo;
 use App\Models\Reparation;
 use App\Models\ReparationCheck;
@@ -60,6 +61,10 @@ class ReparationController extends Controller
     {
         $reparation = Reparation::findOrFail($id);
         $reparation->status = $request->input('valeur');
+        $historique=new Historique();
+        $historique->status=$request->input('valeur');
+        $historique->reparation_id=$reparation->id;
+        $historique->save();
         $reparation->save();
 
         return response()->json(['success' => true]);
@@ -118,6 +123,10 @@ class ReparationController extends Controller
         $component->component_id=$request->component;
         $component->reparation_id=$reparation->id;
         $component->save();
+        $historique=new Historique();
+        $historique->status="reparation";
+        $historique->reparation_id=$reparation->id;
+        $historique->save();
 
         foreach($request->check as $check)
         {
@@ -172,13 +181,16 @@ class ReparationController extends Controller
         $photos=Photo::where('reparation_id',$reparation->id)->get();
         $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
         $components=ReparationCheck::where('reparation_id',$reparation->id)->get();
+        $status=Historique::where('reparation_id',$reparation->id)->get();
+
         return view('reparation.check',
     [
         'client'=>$client,
         'reparation'=>$reparation,
         'photos'=>$photos,
         'checks'=>$checks,
-        'components'=>$components
+        'components'=>$components,
+        'status'=>$status
     ]);
     }
 }
