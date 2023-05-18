@@ -1,5 +1,6 @@
 @extends('layouts.app')
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
 @section('content')
 <style>
 .myDiv{
@@ -30,7 +31,7 @@
                              <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{route('reparation.new')}}">
                                     Añadir una reparación</a></li>
-                                <li><a class="dropdown-item" href="#">Lista de reparaciones</a></li>
+                                <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
                             
                               </ul>
                             </div>
@@ -72,30 +73,46 @@
         </div>
     </div>
     <br>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <h1>
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+    </h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Reparaciones</div>
                     <div class="card-body">
-                    <form>
-                        
+                    <form enctype="multipart/form-data" action='{{route('ajouterreparation')}}' method="post">
+                    @csrf
                         <div class="mb-3">
                         <div class="form-check">
                             <input   class="form-check-input" type="radio" name="client" id="anonyme" value="anonyme" checked>
-                            <label class="form-check-label" for="exampleRadios1">
+                            <label class="form-check-label" >
                                Anonyme
                             </label>
                         </div>
                         <div class="form-check">
                             <input  class="form-check-input" type="radio" name="client" id="nouveau" value="nouveau">
-                            <label  class="form-check-label" for="exampleRadios2">
+                            <label  class="form-check-label" >
                                 Creer Client
                             </label>
                             
                         </div>
                         <div class="form-check">
-                            <input  class="form-check-input" type="radio" name="client" id="creer" value="creer">
-                            <label  class="form-check-label" for="exampleRadios2">
+                            <input  class="form-check-input" type="radio" name="client" id="existe" value="existe">
+                            <label  class="form-check-label" >
                                 Client existant
                             </label>
                         </div>
@@ -138,10 +155,10 @@
           
       
                         </div>
-                        <div  style="display:none"  id="showcreer" class="myDiv">
+                        <div  style="display:none"  id="showexiste" class="myDiv">
                             <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Please Choose:</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select name="id_client" class="form-select" aria-label="Default select example">
                                 @foreach($clients as $client)
                                 <option value="{{$client->id}}" selected>{{$client->nom}} {{$client->prenom}}</option>
                                 
@@ -159,13 +176,13 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Libelle:</label>
-                                    <input name="phone" type="text" class="form-control" id="recipient-name">
+                                    <input name="label" type="text" class="form-control" id="recipient-name">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Description:</label>
-                                    <input name="phone" type="text" class="form-control" id="recipient-name">
+                                    <input name="description" type="text" class="form-control" id="recipient-name">
                                 </div>
                             </div>
                         </div>
@@ -173,27 +190,36 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Categorie:</label>
-                                    <input name="phone" type="text" class="form-control" id="recipient-name">
+                                    <select class="form-select" name="categorie" id="categorie" >
+                                @foreach($categories as $categorie)
+                                <option value="{{$categorie->id}}" selected>{{$categorie->nom}}</option>
+                                
+                                @endforeach
+                            </select> 
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Marque:</label>
-                                    <input name="phone" type="text" class="form-control" id="recipient-name">
+                                    <select name="marque"  class="form-select"id="sousCategorieSelect">
+                                        <option value="">Sélectionnez une sous-catégorie</option>
+                                    </select>             
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Modele:</label>
-                                    <input name="phone" type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Modèle:</label>
+                                    <select name="modele"  class="form-select"id="modeleSelect">
+                                        <option value="">Sélectionnez le modèle</option>
+                                    </select> 
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Code/IMEI:</label>
-                                    <input name="phone" type="text" class="form-control" id="recipient-name">
+                                    <input name="code" type="text" class="form-control" id="recipient-name">
                                 </div>
                             </div>
                         </div>
@@ -202,17 +228,18 @@
                         </div>
                         <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Images:</label>
-                                    <input name="images" type="file" class="form-control" id="recipient-name">
+                                    <input name="images[]" multiple type="file" class="form-control" id="recipient-name">
                         </div>
                         <div class="alert alert-secondary" role="alert">
                           Components
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Components:</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select name="component" class="form-select" aria-label="Default select example">
                                
-                                <option value="" selected></option>
-                                
+                                @foreach($components as $component)
+                            <option value="{{$component->id}}" selected>{{$component->nom}}</option>
+                                @endforeach
                                
                             </select>   
                         </div>
@@ -221,56 +248,31 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="check[]"value="Battery" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
+  Battery
   </label>
                             </div>
                             <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox"  name="check[]"value="Screen" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Screen
+                            </label>
+                            </div>
+                            <div class="col">
+                            <input class="form-check-input" type="checkbox" name="check[]"value="Micro"id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
+    Micro
   </label>
                             </div>
                             <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="check[]"value="Camera"id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
+Camera
   </label>
                             </div>
                         </div> 
-                        <div class="row">
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-                            </div>
-                        </div>  
+                         
                         
                         <div class="col mb-3">
                                     <label for="recipient-name" class="col-form-label">Prix:</label>
@@ -304,7 +306,7 @@
             $("div.myDiv").hide();
             $("#show"+demovalue).show();
         }
-        if (this.value == 'creer') {
+        if (this.value == 'existe') {
             
             $("div.myDiv").hide();
             $("#show"+demovalue).show();
@@ -312,4 +314,71 @@
     });
 });
     </script>
+
+<script>
+    $(document).ready(function() {
+      $('#categorie').change(function() {
+        var categorieId = $(this).val();
+        console.log(categorieId);
+
+        // Faire une requête AJAX vers le serveur Laravel
+        $.ajax({
+          url: '{{route('marque')}}', // URL de la route Laravel qui renvoie les sous-catégories
+          type: 'POST',
+          data: {
+            "categorieId": categorieId,
+            "_token": "{{ csrf_token() }}"
+        },
+          success: function(response) {
+            // Supprimer les anciennes options
+            $('#sousCategorieSelect').empty();
+
+            // Ajouter les nouvelles options en fonction de la réponse du serveur
+            if (response.length > 0) {
+              $.each(response, function(key, value) {
+                $('#sousCategorieSelect').append('<option value="' + value.id + '">' + value.nom + '</option>');
+              });
+            } else {
+              $('#sousCategorieSelect').append('<option  value="">Aucune sous-catégorie disponible</option>');
+            }
+          }
+        });
+      });
+    });
+  </script>
+
+
+
+<script>
+    $(document).ready(function() {
+      $('#sousCategorieSelect').change(function() {
+        var marqueId = $(this).val();
+        console.log(marqueId);
+        console.log("h");
+
+        // Faire une requête AJAX vers le serveur Laravel
+        $.ajax({
+          url: '{{route('modele')}}', // URL de la route Laravel qui renvoie les sous-catégories
+          type: 'POST',
+          data: {
+            "marqueId": marqueId,
+            "_token": "{{ csrf_token() }}"
+        },
+          success: function(response) {
+            // Supprimer les anciennes options
+            $('#modeleSelect').empty();
+
+            // Ajouter les nouvelles options en fonction de la réponse du serveur
+            if (response.length > 0) {
+              $.each(response, function(key, value) {
+                $('#modeleSelect').append('<option value="' + value.id + '">' + value.nom + '</option>');
+              });
+            } else {
+              $('#modeleSelect').append('<option  value="">Aucun modele disponible</option>');
+            }
+          }
+        });
+      });
+    });
+  </script>
 @endsection
