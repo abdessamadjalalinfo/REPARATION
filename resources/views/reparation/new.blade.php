@@ -201,7 +201,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Marque:</label>
-                                    <select name="marque"  class="form-select"id="sousCategorieSelect">
+                                    <select name="marque_id"  class="form-select"id="sousCategorieSelect">
                                         <option value="">Sélectionnez une sous-catégorie</option>
                                     </select>             
                                 </div>

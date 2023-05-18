@@ -61,8 +61,8 @@
                             <i class="fa-solid fa-screwdriver-wrench"></i>Configure
                             </a>
                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégrie</a></li>
-                                <li><a class="dropdown-item" href="#">Add Marque</a></li>
+                                <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
+                                <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                 <li><a class="dropdown-item" href="#">Add Modele</a></li>
                             
                               </ul>
@@ -78,5 +78,39 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-2">
+    <form action="{{route('addingcategorie')}}">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Categorie</label>
+    <input name="nom" type="text" class="form-control" >
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+    </div>
+    <div class="col-8">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nom</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($categories as $categorie)
+  <tr>
+      <th scope="row">{{$categorie->id}}</th>
+      <td>{{$categorie->nom}}</td>
+      
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+    </div>
+</div>
 </div>
 @endsection

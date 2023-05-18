@@ -193,4 +193,47 @@ class ReparationController extends Controller
         'status'=>$status
     ]);
     }
+
+    public function addcategorie()
+    {
+        $categories=Categorie::all();
+        return view('addcategorie',['categories'=>$categories]);
+    }
+    public function addingcategorie(Request $r)
+    {
+        $categorie=new Categorie();
+        $categorie->nom=$r->nom;
+        $categorie->save();
+        return back();
+    }
+    public function addmarque()
+    {
+        $marques=Marque::all();
+        $categories=Categorie::all();
+        return view('addmarque',['marques'=>$marques,'categories'=>$categories]);
+    }
+    public function addingmarque(Request $r)
+    {
+        $marque=new Marque();
+        $marque->nom=$r->nom;
+        $marque->categorie_id=$r->categorie_id;
+
+        $marque->save();
+        return back();
+    }
+    public function addmodele(Request $r)
+    {
+        $categories=Categorie::all();
+        $marques=Marque::all();
+        return view('addmodele',['categories'=>$categories,'marques'=>$marques]);
+    }
+    public function addingmodele(Request $r)
+    {
+        $modele=new Modele();
+        $modele->nom=$r->nom;
+        $modele->marque_id=$r->mrk;
+
+        $modele->save();
+        return back();
+    }
 }

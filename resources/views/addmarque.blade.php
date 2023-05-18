@@ -61,9 +61,9 @@
                             <i class="fa-solid fa-screwdriver-wrench"></i>Configure
                             </a>
                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégrie</a></li>
-                                <li><a class="dropdown-item" href="#">Add Marque</a></li>
-                                <li><a class="dropdown-item" href="#">Add Modele</a></li>
+                                <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
+                                <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
+                                <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
                             
                               </ul>
                             </div>
@@ -78,5 +78,53 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-4">
+    <form action="{{route('addingmarque')}}">
+    <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Categorie</label>
+                <select name="categorie_id"  class="form-select"id="modeleSelect">
+                @foreach($categories as $categorie)
+                <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
+            @endforeach    
+            </select> 
+    </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Marque</label>
+    <input name="nom" type="text" class="form-control" >
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+    </div>
+    <div class="col-8">
+        <h6>Marque</h6>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Categorie</th>
+      <th scope="col">Mark</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($marques as $marque)
+  <tr>
+      <th scope="row">{{$marque->id}}</th>
+      <td scope="row">
+      {{App\Models\Categorie::find($marque->categorie_id)->nom}}  
+      </td>
+      <td>{{$marque->nom}}</td>
+      
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+    </div>
+</div>
 </div>
 @endsection

@@ -33,3 +33,12 @@ Route::post('/modele', [App\Http\Controllers\ReparationController::class, 'model
 Route::get('/listereparation', [App\Http\Controllers\ReparationController::class, 'listereparation'])->name('listereparation')->middleware("auth");
 Route::get('/listereparation/{id}', [App\Http\Controllers\ReparationController::class, 'checkreparation'])->name('checkreparation')->middleware("auth");
 Route::post('/update-colonne/{id}', [App\Http\Controllers\ReparationController::class, 'update'])->name('colonne.update');
+
+Route::get('/addcategorie', [App\Http\Controllers\ReparationController::class, 'addcategorie'])->name('addcategorie');
+Route::get('/addingcategorie', [App\Http\Controllers\ReparationController::class, 'addingcategorie'])->name('addingcategorie');
+
+Route::get('/addmarque', [App\Http\Controllers\ReparationController::class, 'addmarque'])->name('addmarque');
+Route::get('/addingmarque', [App\Http\Controllers\ReparationController::class, 'addingmarque'])->name('addingmarque');
+
+Route::get('/addmodele', [App\Http\Controllers\ReparationController::class, 'addmodele'])->name('addmodele');
+Route::get('/addingmodele', [App\Http\Controllers\ReparationController::class, 'addingmodele'])->name('addingmodele');
