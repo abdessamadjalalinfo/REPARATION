@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->string("dni")->unique();
             $table->string("nom")->default("anonyme");
             $table->string("prenom")->default("anonyme");
             $table->string("email")->default("anonyme");

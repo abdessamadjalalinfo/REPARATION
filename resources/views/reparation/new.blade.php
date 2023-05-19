@@ -23,47 +23,58 @@
 
                    <div class="row">
                         
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('reparation.new')}}">
-                                    Añadir una reparación</a></li>
-                                <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
-                                
-                            
-                              </ul>
-                            </div>
-                        </div>
+                   <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('reparation.new')}}">
+                                      Añadir una reparación</a></li>
+                                  <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
+                                  
+                              
+                                </ul>
+                              </div>
+                          </div>
 
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
-                        
-                       
-                       
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Configure
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
                        
 
 
@@ -121,6 +132,10 @@
                        
                             <div class="row">
                                 <div class="col">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Dni/Nie/Pasaporte:</label>
+                                    <input name="dni"type="text" class="form-control" id="recipient-name">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nom:</label>
                                         <input name="nom"type="text" class="form-control" id="recipient-name">
@@ -189,13 +204,13 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Categorie:</label>
-                                    <select class="form-select" name="categorie" id="categorie" >
-                                @foreach($categories as $categorie)
-                                <option value="{{$categorie->id}}" selected>{{$categorie->nom}}</option>
-                                
-                                @endforeach
-                            </select> 
+                                        <label for="recipient-name" class="col-form-label">Categorie:</label>
+                                        <select class="form-select" name="categorie" id="categorie" >
+                                    @foreach($categories as $categorie)
+                                    <option value="{{$categorie->id}}" selected>{{$categorie->nom}}</option>
+                                    
+                                    @endforeach
+                                </select> 
                                 </div>
                             </div>
                             <div class="col">
@@ -206,15 +221,15 @@
                                     </select>             
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                            </div>
+                            <div class="row">
                             <div class="col">
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Modèle:</label>
-                                    <select name="modele"  class="form-select"id="modeleSelect">
-                                        <option value="">Sélectionnez le modèle</option>
-                                    </select> 
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Modèle:</label>
+                                        <select name="modele"  class="form-select"id="modeleSelect">
+                                            <option value="">Sélectionnez le modèle</option>
+                                        </select> 
+                                    </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">

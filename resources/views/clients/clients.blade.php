@@ -16,44 +16,58 @@
 
                    <div class="row">
                         
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('reparation.new')}}">
-                                    Añadir una reparación</a></li>
-                                <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Lista de clientes</a></li>
-                                
-                            
-                              </ul>
-                            </div>
-                        </div>
+                   <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('reparation.new')}}">
+                                      Añadir una reparación</a></li>
+                                  <li><a class="dropdown-item" href="#">Lista de reparaciones</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
+                                  
+                              
+                                </ul>
+                              </div>
+                          </div>
 
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Configure
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
                         
                        
                        
@@ -84,6 +98,10 @@
       </div>
       <div class="modal-body">
         <form action="{{route('ajouterclient')}}">
+          <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Dni/Nie/Pasaporte:</label>
+              <input name="dni"type="text" class="form-control" id="recipient-name">
+            </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nom:</label>
             <input name="nom"type="text" class="form-control" id="recipient-name">
@@ -121,6 +139,7 @@
     <table class="table">
   <thead>
     <tr>
+      <th scope="col">Dni/Nie/Pasaporte</th>
       <th scope="col">Nom</th>
       <th scope="col">Prénom</th>
       <th scope="col">Email</th>
@@ -132,7 +151,8 @@
   <tbody>
   @foreach($clients as $client) 
   <tr>
-      <th scope="row">{{$client->nom}}</th>
+      <th scope="row">{{$client->dni}}</th>
+      <td>{{$client->nom}}</td>
       <td>{{$client->prenom}}</td>
       <td>{{$client->email}}</td>
       <td>{{$client->phone}}</td>
@@ -149,6 +169,11 @@
               </div>
               <div class="modal-body">
               <form action="{{route('modifierclient')}}">
+          <div class="mb-3">
+
+            <label for="recipient-name" class="col-form-label">Dni/Nie/Pasaporte:</label>
+            <input name="dni"type="text" value="{{$client->dni}}" class="form-control" id="recipient-name">
+          </div>
           <div class="mb-3">
           <input name="id"type="hidden" value="{{$client->id}}" class="form-control" id="recipient-name">
 

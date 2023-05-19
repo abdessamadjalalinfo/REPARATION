@@ -17,44 +17,58 @@
 
                    <div class="row">
                         
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('reparation.new')}}">
-                                    Añadir una reparación</a></li>
-                                <li><a class="dropdown-item" href="#">Lista de reparaciones</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Lista de clientes</a></li>
-                                
-                            
-                              </ul>
-                            </div>
-                        </div>
+                   <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('reparation.new')}}">
+                                      Añadir una reparación</a></li>
+                                  <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
+                                  
+                              
+                                </ul>
+                              </div>
+                          </div>
 
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Configure
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
                         
                        
                        
@@ -91,7 +105,7 @@
   <tbody>
   @foreach($reparations as $reparation) 
   <tr>
-      <th scope="row">{{App\Models\Client::find($reparation->client_id)->nom}}</th>
+      <th scope="row">{{App\Models\Client::find($reparation->client_id)->dni}}: {{App\Models\Client::find($reparation->client_id)->nom}} {{App\Models\Client::find($reparation->client_id)->prenom}}</th>
       <td>{{App\Models\Categorie::find($reparation->categorie_id)->nom}}</td>
       <td>{{App\Models\Marque::find($reparation->marque_id)->nom}}</td>
       <td>{{App\Models\Modele::find($reparation->model_id)->nom}}</td>
@@ -112,6 +126,8 @@
       <td>{{$reparation->created_at}}</td>
       <td> 
         <a href="{{route('checkreparation',$reparation->id)}}"class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="{{route('deletereparation',$reparation->id)}}"class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+      
       </td>
 
     </tr>

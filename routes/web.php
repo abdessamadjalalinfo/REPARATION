@@ -26,6 +26,7 @@ Route::get('/ajouter', [App\Http\Controllers\ReparationController::class, 'ajout
 Route::get('/modifier', [App\Http\Controllers\ReparationController::class, 'modifierclient'])->name('modifierclient')->middleware("auth");
 
 Route::post('/ajouterreparation', [App\Http\Controllers\ReparationController::class, 'ajouterreparation'])->name('ajouterreparation')->middleware("auth");
+Route::get('/deletereparation/{id}', [App\Http\Controllers\ReparationController::class, 'deletereparation'])->name('deletereparation')->middleware("auth");
 
 Route::post('/marque', [App\Http\Controllers\ReparationController::class, 'marque'])->name('marque')->middleware("auth");
 Route::post('/modele', [App\Http\Controllers\ReparationController::class, 'modele'])->name('modele')->middleware("auth");
@@ -42,3 +43,10 @@ Route::get('/addingmarque', [App\Http\Controllers\ReparationController::class, '
 
 Route::get('/addmodele', [App\Http\Controllers\ReparationController::class, 'addmodele'])->name('addmodele');
 Route::get('/addingmodele', [App\Http\Controllers\ReparationController::class, 'addingmodele'])->name('addingmodele');
+
+
+Route::get('/modifierreparation', [App\Http\Controllers\ReparationController::class, 'modifierreparation'])->name('modifierreparation')->middleware("auth");
+
+
+Route::get('/etiquette/{id}', [App\Http\Controllers\ReparationController::class, 'etiquette'])->name('etiquette')->middleware("auth");
+Route::get('/ticket/{id}', [App\Http\Controllers\ReparationController::class, 'ticket'])->name('ticket')->middleware("auth");

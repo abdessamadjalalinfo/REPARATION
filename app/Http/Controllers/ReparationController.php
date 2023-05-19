@@ -37,6 +37,7 @@ class ReparationController extends Controller
     {
         $client=new Client();
         $client->nom=$req->nom;
+        $client->dni=$req->dni;
         $client->prenom=$req->prenom;
         $client->email=$req->email;
         $client->phone=$req->phone;
@@ -49,6 +50,7 @@ class ReparationController extends Controller
     {
         $client=Client::find($req->id);
         $client->nom=$req->nom;
+        $client->dni=$req->dni;
         $client->prenom=$req->prenom;
         $client->email=$req->email;
         $client->phone=$req->phone;
@@ -69,6 +71,21 @@ class ReparationController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function modifierreparation(Request $request)
+    {
+        $reparation=Reparation::find($request->id);
+        $reparation->categorie_id=$request->categorie;
+        $reparation->marque_id=$request->marque_id;
+        $reparation->model_id=$request->modele;
+        $reparation->code=$request->code;
+        $reparation->description=$request->description;
+        $reparation->prix=$request->prix;
+        $reparation->save();
+        return back();
+    }
+
+
+
     public function ajouterreparation(Request $request)
     {
         $request->validate([
@@ -90,6 +107,7 @@ class ReparationController extends Controller
         if($request->client=="nouveau")
         {
             $client=new Client();
+            $client->dni=$request->dni;
             $client->nom=$request->nom;
             $client->prenom=$request->prenom;
             $client->email=$request->email;
@@ -182,7 +200,7 @@ class ReparationController extends Controller
         $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
         $components=ReparationCheck::where('reparation_id',$reparation->id)->get();
         $status=Historique::where('reparation_id',$reparation->id)->get();
-
+        $categories=Categorie::all();
         return view('reparation.check',
     [
         'client'=>$client,
@@ -190,7 +208,8 @@ class ReparationController extends Controller
         'photos'=>$photos,
         'checks'=>$checks,
         'components'=>$components,
-        'status'=>$status
+        'status'=>$status,
+        'categories'=>$categories
     ]);
     }
 
@@ -225,7 +244,8 @@ class ReparationController extends Controller
     {
         $categories=Categorie::all();
         $marques=Marque::all();
-        return view('addmodele',['categories'=>$categories,'marques'=>$marques]);
+        $modeles=Modele::all();
+        return view('addmodele',['categories'=>$categories,'marques'=>$marques,"modeles"=>$modeles]);
     }
     public function addingmodele(Request $r)
     {
@@ -235,5 +255,44 @@ class ReparationController extends Controller
 
         $modele->save();
         return back();
+    }
+
+    public function deletereparation($id)
+    {
+        $historiques=Historique::where('reparation_id',$id)->get();
+        foreach($historiques as $historique)
+        {
+            $historique->delete();
+        }
+        $photos=Photo::where('reparation_id',$id)->get();
+        foreach($photos as $photo)
+        {
+            $photo->delete();
+        }
+
+        $checks=ReparationCheck::where('reparation_id',$id)->get();
+        foreach($checks as $check)
+        {
+            $check->delete();
+        }
+        $components=ReparationCompo::where('reparation_id',$id)->get();
+        foreach($components as $component)
+        {
+            $component->delete();
+        }
+        $reparation=Reparation::find($id);
+        $reparation->delete();
+        return back();
+    }
+
+    public function etiquette($id)
+    {
+        $reparation=Reparation::find($id);
+        return view('etiquette',['reparation'=>$reparation]);
+    }
+    public function ticket($id)
+    {
+        $reparation=Reparation::find($id);
+        return view('ticket',['reparation'=>$reparation]);
     }
 }

@@ -16,58 +16,58 @@
 
                    <div class="row">
                         
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('reparation.new')}}">
-                                    Añadir una reparación</a></li>
-                                <li><a class="dropdown-item" href="#">Lista de reparaciones</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
-                                
-                            
-                              </ul>
-                            </div>
-                        </div>
+                   <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Reparaciones
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('reparation.new')}}">
+                                      Añadir una reparación</a></li>
+                                  <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
+                                  
+                              
+                                </ul>
+                              </div>
+                          </div>
 
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="col">
-                            <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>Configure
-                            </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
-                                <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
-                                <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
-                            
-                              </ul>
-                            </div>
-                        </div>
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
+                          
+                          <div class="col">
+                              <div class="dropdown">
+                              <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>Configure
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                              
+                                </ul>
+                              </div>
+                          </div>
                        
                        
                        
@@ -89,7 +89,7 @@
                 @foreach($categories as $categorie)
                 <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
             @endforeach    
-            </select> 
+    </select> 
     </div>
     <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Marque</label>
