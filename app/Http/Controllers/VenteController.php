@@ -92,4 +92,20 @@ class VenteController extends Controller
         return back();
 
     }
+    public function editvente(Request $request)
+    {
+        $vente=Vente::find($request->id);
+        $vente->prix=$request->prix;
+        $vente->quantite=$request->quantite;
+
+        $vente->methode=$request->method;
+        $vente->totale=$request->prix*$request->quantite;
+        $vente->save();
+        return back();
+    }
+    public function ticketvente($id)
+    {
+        $vente=Vente::find($id);
+        return view('ventes.ticket',['vente'=>$vente]);
+    }
 }

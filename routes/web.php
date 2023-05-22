@@ -60,3 +60,7 @@ Route::post('/adding', [App\Http\Controllers\VenteController::class, 'adding'])-
 Route::get('/listeventes', [App\Http\Controllers\VenteController::class, 'listeventes'])->name('listeventes')->middleware("auth");
 
 Route::get('/deletevente/{id}', [App\Http\Controllers\VenteController::class, 'deletevente'])->name('deletevente')->middleware("auth");
+
+
+Route::get('/editvente', [App\Http\Controllers\VenteController::class, 'editvente'])->name('editvente')->middleware("auth");
+Route::get('/ticketvente/{id}', [App\Http\Controllers\VenteController::class, 'ticketvente'])->name('ticketvente')->middleware("auth");
