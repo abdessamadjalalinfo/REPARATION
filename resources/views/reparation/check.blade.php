@@ -49,7 +49,7 @@
                               <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
                               </a>
                               <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="{{route('ajoutervente')}}">Añadir una Ventas</a></li>
                                   <li><a class="dropdown-item" href="#">Another action</a></li>
                               
                                 </ul>
@@ -149,7 +149,18 @@
             <li class="list-group-item"><i class="fa-solid fa-user"></i>Prenom : {{$client->nom}}</li>
             <li class="list-group-item"><i class="fa-solid fa-passport"></i>Passeport :</li>
             <li class="list-group-item"><i class="fa-solid fa-envelope"></i>Email : {{$client->email}}</li>
-            <li class="list-group-item"><i class="fa-solid fa-phone"></i>Phone : {{$client->phone}}</li>
+            <li class="list-group-item"><i class="fa-solid fa-phone"></i>Phone : {{$client->phone}}
+          
+            <form action="{{route('whatssap')}}">
+  <div class="mb-3">
+  <input type="hidden" class="form-control" name="phone" value="{{$client->phone}}">
+  
+  <label for="exampleInputEmail1" class="form-label">Message Whatssap</label>
+    <input type="text" class="form-control" name="message">
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i></button>
+</form >
+          </li>
             <li class="list-group-item"><i class="fa-solid fa-address-card"></i>Adresse : {{$client->adresse}}</li>
         </ul>
         </div>

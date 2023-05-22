@@ -295,4 +295,10 @@ class ReparationController extends Controller
         $reparation=Reparation::find($id);
         return view('ticket',['reparation'=>$reparation]);
     }
+
+    public function whatssap(Request $request)
+    {
+        return redirect("https://wa.me/".$request->phone."/?text=".$request->message);
+    }
+    
 }

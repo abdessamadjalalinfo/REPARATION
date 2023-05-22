@@ -56,7 +56,7 @@
                               </a>
                               <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="{{route('ajoutervente')}}">Añadir una Ventas</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                                  <li><a class="dropdown-item" href="{{route('listeventes')}}">Lista ventes</a></li>
                               
                                 </ul>
                               </div>
@@ -103,9 +103,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Reparaciones</div>
+                    <div class="card-header">Ventes</div>
                     <div class="card-body">
-                    <form enctype="multipart/form-data" action='{{route('ajouterreparation')}}' method="post">
+                    <form enctype="multipart/form-data" action="{{route('adding')}}" method="post">
                     @csrf
                         <div class="mb-3">
                         <div class="form-check">
@@ -184,22 +184,17 @@
 
                         </div>
                         <div class="alert alert-secondary" role="alert">
-                            Reparation
+                            Ventes
                         </div>
                         
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Libelle:</label>
+                                    <label for="recipient-name" class="col-form-label">Label:</label>
                                     <input name="label" type="text" class="form-control" id="recipient-name">
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Description:</label>
-                                    <input name="description" type="text" class="form-control" id="recipient-name">
-                                </div>
-                            </div>
+                           
                         </div>
                         <div class="row">
                             <div class="col">
@@ -231,68 +226,23 @@
                                         </select> 
                                     </div>
                             </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Code/IMEI:</label>
-                                    <input name="code" type="text" class="form-control" id="recipient-name">
-                                </div>
-                            </div>
+                           
                         </div>
-                        <div class="alert alert-secondary" role="alert">
-                          Photos
-                        </div>
-                        <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Images:</label>
-                                    <input name="images[]" multiple type="file" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="alert alert-secondary" role="alert">
-                          Components
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Components:</label>
-                            <select name="component" class="form-select" aria-label="Default select example">
-                               
-                                @foreach($components as $component)
-                            <option value="{{$component->id}}" selected>{{$component->nom}}</option>
-                                @endforeach
-                               
-                            </select>   
-                        </div>
-                        <div class="alert alert-secondary" role="alert">
-                          Checking
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" name="check[]"value="Battery" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-  Battery
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox"  name="check[]"value="Screen" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Screen
-                            </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" name="check[]"value="Micro"id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Micro
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" name="check[]"value="Camera"id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-Camera
-  </label>
-                            </div>
-                        </div> 
+                       
+                        
+                      
+                       
                          
                         
                         <div class="col mb-3">
-                                    <label for="recipient-name" class="col-form-label">Prix:</label>
-                                    <input name="prix" type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Prix Unitaire:</label>
+                                    <input name="prix" type="number" class="form-control" id="recipient-name">
                         </div>
+                        <div class="col mb-3">
+                                    <label for="recipient-name" class="col-form-label">Quantite:</label>
+                                    <input name="quantite" type="number" class="form-control" id="recipient-name">
+                        </div>
+                        
                         
                        
                         <button type="submit" class="btn btn-primary">Ajouter</button>

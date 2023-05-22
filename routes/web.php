@@ -50,3 +50,13 @@ Route::get('/modifierreparation', [App\Http\Controllers\ReparationController::cl
 
 Route::get('/etiquette/{id}', [App\Http\Controllers\ReparationController::class, 'etiquette'])->name('etiquette')->middleware("auth");
 Route::get('/ticket/{id}', [App\Http\Controllers\ReparationController::class, 'ticket'])->name('ticket')->middleware("auth");
+
+Route::get('/whatssap', [App\Http\Controllers\ReparationController::class, 'whatssap'])->name('whatssap')->middleware("auth");
+
+
+Route::get('/ajoutervente', [App\Http\Controllers\VenteController::class, 'ajoutervente'])->name('ajoutervente')->middleware("auth");
+Route::post('/adding', [App\Http\Controllers\VenteController::class, 'adding'])->name('adding')->middleware("auth");
+
+Route::get('/listeventes', [App\Http\Controllers\VenteController::class, 'listeventes'])->name('listeventes')->middleware("auth");
+
+Route::get('/deletevente/{id}', [App\Http\Controllers\VenteController::class, 'deletevente'])->name('deletevente')->middleware("auth");

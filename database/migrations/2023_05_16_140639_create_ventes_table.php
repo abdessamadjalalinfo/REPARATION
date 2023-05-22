@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
             $table->string("label")->default("none");
+            $table->string("totale")->default("none");
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients');
             $table->unsignedBigInteger('categorie_id');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('model_id');
             $table->foreign('model_id')->references('id')->on('models');
             $table->string("prix")->default("0");
+            $table->string("quantite")->default("0");
             $table->string("methode")->default("cash");
             $table->timestamps();
         });

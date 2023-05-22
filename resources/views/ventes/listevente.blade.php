@@ -84,7 +84,7 @@
     
 
     <div class="alert alert-primary" role="alert">
-  Reparations
+  Ventes
 </div>
 
     <table class="table">
@@ -94,39 +94,33 @@
       <th scope="col">Categorie</th>
       <th scope="col">Marque</th>
       <th scope="col">Modele</th>
-      <th scope="col">Code</th>
-      <th scope="col">Status</th>
-      <th scope="col">Update</th>
-      <th scope="col">Prix</th>
+      <th scope="col">label</th>
+     
+      <th scope="col">Prix Unitaire</th>
+      <th scope="col">Quantité</th>
+      <th scope="col">Totale</th>
       <th scope="col">Date</th>
       <th scope="col">Option</th>
     </tr>
   </thead>
   <tbody>
-  @foreach($reparations as $reparation) 
+  @foreach($ventes as $vente) 
   <tr>
-      <th scope="row">{{App\Models\Client::find($reparation->client_id)->dni}}: {{App\Models\Client::find($reparation->client_id)->nom}} {{App\Models\Client::find($reparation->client_id)->prenom}}</th>
-      <td>{{App\Models\Categorie::find($reparation->categorie_id)->nom}}</td>
-      <td>{{App\Models\Marque::find($reparation->marque_id)->nom}}</td>
-      <td>{{App\Models\Modele::find($reparation->model_id)->nom}}</td>
-      <td>{{$reparation->code}}</td>
-      <td>
-        
-        <select name="status" class="colonne-select" data-id="{{ $reparation->id }}">
-        <option @if($reparation->status=="non resolu") style="color:red" selected @endif value="non resolu">non resolu</option>
-        <option @if($reparation->status=="done") style="color:green" selected @endif value="done">done</option>
-        <option @if($reparation->status=="reparation") style="color:red" selected @endif value="reparation">reparation</option>
-
-      </select>
-      <td>
-                        <button class="btn btn-success update-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+      <th scope="row">{{App\Models\Client::find($vente->client_id)->dni}}: {{App\Models\Client::find($vente->client_id)->nom}} {{App\Models\Client::find($vente->client_id)->prenom}}</th>
+      <td>{{App\Models\Categorie::find($vente->categorie_id)->nom}}</td>
+      <td>{{App\Models\Marque::find($vente->marque_id)->nom}}</td>
+      <td>{{App\Models\Modele::find($vente->model_id)->nom}}</td>
+      <td>{{$vente->label}}</td>
+      
         </td>
       </td>
-      <td>{{$reparation->prix}}</td>
-      <td>{{$reparation->created_at}}</td>
+      <td>{{$vente->prix}}</td>
+      <td>{{$vente->quantite}}</td>
+      <td>{{$vente->totale}}</td>
+      <td>{{$vente->created_at}}</td>
       <td> 
-        <a href="{{route('checkreparation',$reparation->id)}}"class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <a href="{{route('deletereparation',$reparation->id)}}"class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+        <a href="{{route('checkreparation',$vente->id)}}"class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="{{route('deletevente',$vente->id)}}"class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
       
       </td>
 
@@ -139,28 +133,5 @@
 </div>
 
 
-<script>
-        $(document).ready(function() {
-            $('.update-btn').click(function() {
-                var selectElement = $(this).closest('tr').find('.colonne-select');
-                var valeur = selectElement.val();
-                var id = selectElement.data('id');
-                var url = "{{ route('colonne.update', ':id') }}";
-                url = url.replace(':id', id);
-                console.log(url,id,valeur);
-                $.ajax({
-                    url: url,
-                    type: "post",
-                    data: {valeur: valeur,
-                    "_token":"{{ csrf_token() }}"},
-                    success: function(response) {
-                        alert('Changed!');
-                    },
-                    error: function(xhr) {
-                        alert('Une erreur s\'est produite lors de la mise à jour de la colonne.');
-                    }
-                });
-            });
-        });
-    </script>
+
 @endsection

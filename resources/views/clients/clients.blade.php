@@ -48,7 +48,7 @@
                               <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
                               </a>
                               <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="{{route('ajoutervente')}}">Añadir una Ventas</a></li>
                                   <li><a class="dropdown-item" href="#">Another action</a></li>
                               
                                 </ul>
