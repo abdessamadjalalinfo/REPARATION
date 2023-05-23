@@ -86,7 +86,7 @@
   Reparations
     </div>
     <div class="container row">
-        <div class="col-1"><a href="#" target="_blank" class="btn btn-success"><i class="fa-solid fa-ticket"></i>Facture</a></div>
+        <div class="col-1"><a href="{{route('facture',$reparation->id)}}" target="_blank" class="btn btn-success"><i class="fa-solid fa-ticket"></i>Facture</a></div>
         <div class="col-1"><a target="_blank"  href="{{route('ticket',$reparation->id)}}" class="btn btn-success"><i class="fa-regular fa-ticket"></i>Ticket</a></div>
         <div class="col-1"><a target="_blank" href="{{route('etiquette',$reparation->id)}}" class="btn btn-success"><i class="fa-solid fa-qrcode"></i>Etiqueta_R</a></div>
     </div>

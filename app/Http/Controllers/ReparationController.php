@@ -290,10 +290,20 @@ class ReparationController extends Controller
         $reparation=Reparation::find($id);
         return view('etiquette',['reparation'=>$reparation]);
     }
+    public function facture($id)
+    {   $reparation=Reparation::find($id);
+        $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
+
+        return view('facture',['reparation'=>$reparation,'checks'=>$checks]);
+
+    }
     public function ticket($id)
     {
+        
         $reparation=Reparation::find($id);
-        return view('ticket',['reparation'=>$reparation]);
+        $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
+
+        return view('ticket',['reparation'=>$reparation,'checks'=>$checks]);
     }
 
     public function whatssap(Request $request)

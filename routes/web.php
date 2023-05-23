@@ -50,6 +50,7 @@ Route::get('/modifierreparation', [App\Http\Controllers\ReparationController::cl
 
 Route::get('/etiquette/{id}', [App\Http\Controllers\ReparationController::class, 'etiquette'])->name('etiquette')->middleware("auth");
 Route::get('/ticket/{id}', [App\Http\Controllers\ReparationController::class, 'ticket'])->name('ticket')->middleware("auth");
+Route::get('/facture/{id}', [App\Http\Controllers\ReparationController::class, 'facture'])->name('facture')->middleware("auth");
 
 Route::get('/whatssap', [App\Http\Controllers\ReparationController::class, 'whatssap'])->name('whatssap')->middleware("auth");
 
