@@ -65,7 +65,7 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
-                              
+                                  <li><a class="dropdown-item" href="{{route('updatestore')}}">Update store</a></li>
                                 </ul>
                               </div>
                           </div>
@@ -173,6 +173,8 @@
     
   </tbody>
 </table>
+
+{{ $ventes->render() }}
     </div>
 </div>
 

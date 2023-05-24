@@ -24,15 +24,19 @@
     <div class="container mt-2">
 
               <div class="row">
-                <div class="col-1">
-                    <h1>Logo</h1>
+                <div class="col-1S">
+                  <img width="90" src="{{ asset('images/'.$store->logo) }}" />
                 </div>
                 <div class="col-2 offset-9">
-                <p>Mobile Shop</p>
-                <p>Calle Manuel de falla 31</p>
-                <p>Girona (17009)</p>
-                <p>Tel: 632541125</p>
-                <p>abdo@gmail.com</p>
+                <p>{{$store->cif}}</p>
+                <p>{{$store->nombre_social}}</p>
+                <p>{{$store->localisation}}</p>
+                <p>{{$store->zip}}</p>
+                <p>{{$store->pays}}</p>
+                <p>Tel: {{$store->phone}}</p>
+                <p>Whatssap: {{$store->whatssap}}</p>
+                <p> {{$store->email}}</p>
+                <p> {{$store->site}}</p>
                 </div>
               </div>
               <div class="row">

@@ -7,12 +7,14 @@ use App\Models\Photo;
 use App\Models\Reparation;
 use App\Models\ReparationCheck;
 use App\Models\ReparationCompo;
+use App\Models\Store;
 use App\Models\Vente;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Categorie;
 use App\Models\Marque;
 use App\Models\Modele;
+use Illuminate\Validation\Rule;
 
 
 class VenteController extends Controller
@@ -45,6 +47,16 @@ class VenteController extends Controller
         }
         if($request->client=="nouveau")
         {
+            $request->validate([
+                'dni' => [
+                    'required',
+                    Rule::unique('clients')->where(function ($query) use ($request) {
+                        return $query->where('dni', $request->dni);
+                    }),
+                ],
+            ], [
+                'dni' => 'La valeur saisie est déjà utilisée.',
+            ]);
             $client=new Client();
             $client->dni=$request->dni;
             $client->nom=$request->nom;
@@ -82,7 +94,7 @@ class VenteController extends Controller
 
     public function listeventes()
     {
-        $ventes=Vente::all();
+        $ventes=Vente::Paginate(10); ;
         return view('ventes.listevente',['ventes'=>$ventes]);
   
     }
@@ -106,6 +118,7 @@ class VenteController extends Controller
     public function ticketvente($id)
     {
         $vente=Vente::find($id);
-        return view('ventes.ticket',['vente'=>$vente]);
+        $store=Store::find(1);
+        return view('ventes.ticket',['vente'=>$vente,'store'=>$store]);
     }
 }

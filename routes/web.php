@@ -65,3 +65,6 @@ Route::get('/deletevente/{id}', [App\Http\Controllers\VenteController::class, 'd
 
 Route::get('/editvente', [App\Http\Controllers\VenteController::class, 'editvente'])->name('editvente')->middleware("auth");
 Route::get('/ticketvente/{id}', [App\Http\Controllers\VenteController::class, 'ticketvente'])->name('ticketvente')->middleware("auth");
+
+Route::get('/updatestore', [App\Http\Controllers\ReparationController::class, 'updatestore'])->name('updatestore');
+Route::post('/update_store', [App\Http\Controllers\ReparationController::class, 'update_store'])->name('update.store');

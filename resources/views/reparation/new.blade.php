@@ -71,7 +71,7 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
-                              
+                                  <li><a class="dropdown-item" href="{{route('updatestore')}}">Update store</a></li>
                                 </ul>
                               </div>
                           </div>
@@ -104,6 +104,11 @@
         <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Reparaciones</div>
+                    @if($errors->has('dni'))
+                <span class="text-danger">
+                    {{ $errors->first('dni') }}
+                </span>
+            @endif
                     <div class="card-body">
                     <form enctype="multipart/form-data" action='{{route('ajouterreparation')}}' method="post">
                     @csrf
@@ -250,7 +255,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Components:</label>
-                            <select name="component" class="form-select" aria-label="Default select example">
+                            <select name="components[]" multiple class="form-control" >
                                
                                 @foreach($components as $component)
                             <option value="{{$component->id}}" selected>{{$component->nom}}</option>
@@ -291,7 +296,7 @@ Camera
                         
                         <div class="col mb-3">
                                     <label for="recipient-name" class="col-form-label">Prix:</label>
-                                    <input name="prix" type="text" class="form-control" id="recipient-name">
+                                    <input name="prix" type="number" class="form-control" id="recipient-name">
                         </div>
                         
                        

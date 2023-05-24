@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Administrador</div>
+              
 
                 <div class="card-body">
                     @if (session('status'))
@@ -64,7 +65,7 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
-                              
+                                  <li><a class="dropdown-item" href="{{route('updatestore')}}">Update store</a></li>
                                 </ul>
                               </div>
                           </div>
@@ -81,6 +82,11 @@
     </div>
     <div class="row justify-content-center">
 <div class="row">
+@if($errors->has('dni'))
+                <span class="text-danger">
+                    {{ $errors->first('dni') }}
+                </span>
+            @endif
 <div class="col">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"><i class="fa-solid fa-plus"></i>
 </button>
@@ -215,6 +221,13 @@
     
   </tbody>
 </table>
+
+
+
     </div>
+    <div class=" col-6 pagination">
+    {{ $clients->links() }}
 </div>
+</div>
+
 @endsection

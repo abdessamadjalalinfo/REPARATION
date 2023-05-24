@@ -25,12 +25,19 @@
         
                 
             
-            <div syle="text-align: center;"  class="col-3"  syle="text-align: center;">
+            <div syle="text-align: center;"  class="col-4"  syle="text-align: center;">
                 <div syle="text-align: center;  font-size: 7px;" >
-                    <p>Calle Manuel de falla 31</p>
-                    <p><strong>CIF/NIF:</strong> b3713421</p>
-                    <p><strong>Tel.:</strong> 632541125</p>
-                    <p><strong>Email:</strong>: mobileshop@email.com</p>
+                
+                
+                
+                
+                
+
+                <p>{{$store->cif}}</p>
+                <p>{{$store->nombre_social}}</p>
+                <p>Tel: {{$store->phone}}</p>
+                <p>Whatssap: {{$store->whatssap}}</p>
+                <p> </p>
                     <p><strong>------------------------------------</strong></p>
                     
                     <p><strong>Nombre</strong> {{$reparation->client->nom}}{{$reparation->client->prenom}}</p>
@@ -45,9 +52,10 @@
                     <p><strong>Modelo:</strong>{{$reparation->modele->nom}}</p>
                     <p><strong>Coste estimado:</strong>{{$reparation->prix}} </p>
                     <p><strong>------------------------------------</strong></p>
-                    <p><strong style="
-    margin-left: 40px;
-">www.google.com</strong> </p>
+                    <p><strong 
+>{{$store->email}}</strong> </p>
+
+<p><strong >{{$store->localisation}} {{$store->zip}} {{$store->pays}}</strong> </p>
 
                 </div>
             </div> 

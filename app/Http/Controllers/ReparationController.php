@@ -8,11 +8,13 @@ use App\Models\Photo;
 use App\Models\Reparation;
 use App\Models\ReparationCheck;
 use App\Models\ReparationCompo;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Categorie;
 use App\Models\Marque;
 use App\Models\Modele;
+use Illuminate\Validation\Rule;
 
 
 class ReparationController extends Controller
@@ -30,11 +32,22 @@ class ReparationController extends Controller
     }
     public function clients()
     {
-        $clients=Client::all();
+        $clients=Client::Paginate(20);
         return view("clients.clients",['clients'=>$clients]);
     }
     public function ajouterclient(Request $req)
     {
+        $req->validate([
+            'dni' => [
+                'required',
+                Rule::unique('clients')->where(function ($query) use ($req) {
+                    return $query->where('dni', $req->dni);
+                }),
+            ],
+        ], [
+            'dni' => 'La valeur saisie est déjà utilisée.',
+        ]);
+        
         $client=new Client();
         $client->nom=$req->nom;
         $client->dni=$req->dni;
@@ -48,6 +61,16 @@ class ReparationController extends Controller
     }
     public function modifierclient(Request $req)
     {
+        $req->validate([
+            'dni' => [
+                'required',
+                Rule::unique('clients')->where(function ($query) use ($req) {
+                    return $query->where('dni', $req->dni);
+                }),
+            ],
+        ], [
+            'dni' => 'La valeur saisie est déjà utilisée.',
+        ]);
         $client=Client::find($req->id);
         $client->nom=$req->nom;
         $client->dni=$req->dni;
@@ -97,7 +120,7 @@ class ReparationController extends Controller
             $reparation->label=$request->label;
             $reparation->client_id=1;
             $reparation->categorie_id=$request->categorie;
-            $reparation->marque_id=$request->marque;
+            $reparation->marque_id=$request->marque_id;
             $reparation->model_id=$request->modele;
             $reparation->code=$request->code;
             $reparation->description=$request->description;
@@ -106,6 +129,17 @@ class ReparationController extends Controller
         }
         if($request->client=="nouveau")
         {
+            
+            $request->validate([
+                'dni' => [
+                    'required',
+                    Rule::unique('clients')->where(function ($query) use ($request) {
+                        return $query->where('dni', $request->dni);
+                    }),
+                ],
+            ], [
+                'dni' => 'La valeur saisie est déjà utilisée.',
+            ]);
             $client=new Client();
             $client->dni=$request->dni;
             $client->nom=$request->nom;
@@ -137,10 +171,13 @@ class ReparationController extends Controller
             $reparation->prix=$request->prix;
             $reparation->save();
         }
-        $component=new ReparationCompo();
-        $component->component_id=$request->component;
-        $component->reparation_id=$reparation->id;
-        $component->save();
+        foreach($request->components as $x){
+            $component=new ReparationCompo();
+            $component->component_id=$x;
+            $component->reparation_id=$reparation->id;
+            $component->save();
+        }
+            
         $historique=new Historique();
         $historique->status="reparation";
         $historique->reparation_id=$reparation->id;
@@ -188,7 +225,7 @@ class ReparationController extends Controller
 
     public function listereparation()
     {
-        $reparations=Reparation::all();
+        $reparations=Reparation::paginate(15);
         return view('reparation.listereparation',['reparations'=>$reparations]);
     }
 
@@ -230,6 +267,14 @@ class ReparationController extends Controller
         $marques=Marque::all();
         $categories=Categorie::all();
         return view('addmarque',['marques'=>$marques,'categories'=>$categories]);
+    }
+    public function updatestore()
+    {
+        $store=Store::find(1);
+        
+        return view('store',['store'=>$store]);
+   
+
     }
     public function addingmarque(Request $r)
     {
@@ -293,22 +338,61 @@ class ReparationController extends Controller
     public function facture($id)
     {   $reparation=Reparation::find($id);
         $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
+        $store=Store::find(1);
+        
 
-        return view('facture',['reparation'=>$reparation,'checks'=>$checks]);
+        return view('facture',['reparation'=>$reparation,'checks'=>$checks,'store'=>$store]);
 
     }
     public function ticket($id)
     {
-        
+        $store=Store::find(1);
         $reparation=Reparation::find($id);
         $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
 
-        return view('ticket',['reparation'=>$reparation,'checks'=>$checks]);
+        return view('ticket',['reparation'=>$reparation,'checks'=>$checks,'store'=>$store]);
     }
 
     public function whatssap(Request $request)
     {
         return redirect("https://wa.me/".$request->phone."/?text=".$request->message);
+    }
+
+    public function update_store(Request $request)
+    {
+        
+        $store=Store::find(1);
+        $store->nombre_social=$request->nombre_social;
+        $store->cif=$request->cif;
+
+        $store->direction=$request->direction;
+        $store->localisation=$request->localisation;
+        $store->zip=$request->zip;
+
+        $store->pays=$request->pays;
+        $store->phone=$request->phone;
+        $store->site=$request->site;
+        $store->whatssap=$request->whatssap;
+        $store->email=$request->email;
+        if($request->image)
+        {
+            $request->validate([
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            ]);
+    
+            $imageName = time().'.'.$request->image->extension();
+    
+            // Public Folder
+            $request->image->move(public_path('images'), $imageName);
+    
+            
+            $store->logo=$imageName;
+            $store->save();
+            return back()->with('success', 'Updated')->with('image', $imageName);
+        }
+        
+        $store->save();
+        return back()->with('success', 'Updated')->with('image', $store->logo);;
     }
     
 }
