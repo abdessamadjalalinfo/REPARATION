@@ -68,3 +68,9 @@ Route::get('/ticketvente/{id}', [App\Http\Controllers\VenteController::class, 't
 
 Route::get('/updatestore', [App\Http\Controllers\ReparationController::class, 'updatestore'])->name('updatestore');
 Route::post('/update_store', [App\Http\Controllers\ReparationController::class, 'update_store'])->name('update.store');
+
+
+Route::get('/users', [App\Http\Controllers\ReparationController::class, 'users'])->name('users')->middleware("auth");
+Route::get('/admin/{id}', [App\Http\Controllers\ReparationController::class, 'admin'])->name('admin')->middleware("auth");
+
+Route::get('/deleteuser/{id}', [App\Http\Controllers\ReparationController::class, 'deleteuser'])->name('deleteuser')->middleware("auth");

@@ -9,6 +9,7 @@ use App\Models\Reparation;
 use App\Models\ReparationCheck;
 use App\Models\ReparationCompo;
 use App\Models\Store;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Categorie;
@@ -394,5 +395,32 @@ class ReparationController extends Controller
         $store->save();
         return back()->with('success', 'Updated')->with('image', $store->logo);;
     }
-    
+    public function users()
+    {
+        $users=User::Paginate(20);
+        return view("users",['users'=>$users]);
+    }
+    public function admin($id)
+    {
+        $user=User::find($id);
+        if($user->type=="admin")
+        {
+            $user->type="normal";
+            $user->save();
+            return back();
+        }
+        if($user->type=="normal")
+        {
+            $user->type="admin";
+            $user->save();
+            return back();
+        }
+    }
+    public function deleteuser($id)
+    {
+        $user=User::find($id);
+       
+        $user->delete();
+        return back();
+    }
 }

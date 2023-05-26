@@ -23,8 +23,8 @@
                               </a>
                               <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="{{route('reparation.new')}}">
-                                      Añadir una reparación</a></li>
-                                  <li><a class="dropdown-item" href="{{route('listereparation')}}">Lista de reparaciones</a></li>
+                                  <i class="fa-solid fa-plus"></i>Añadir una reparación</a></li>
+                                  <li><a class="dropdown-item" href="{{route('listereparation')}}"><i class="fa-solid fa-list"></i>Lista de reparaciones</a></li>
                               
                                 </ul>
                               </div>
@@ -32,10 +32,10 @@
                           <div class="col">
                               <div class="dropdown">
                               <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="fa-solid fa-screwdriver-wrench"></i>Clientes
+                              <i class="fa-solid fa-users"></i>Clientes
                               </a>
                               <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="{{route('clients')}}">Lista de clientes</a></li>
+                                  <li><a class="dropdown-item" href="{{route('clients')}}"><i class="fa-solid fa-list"></i>Lista de clientes</a></li>
                                   
                               
                                 </ul>
@@ -45,11 +45,11 @@
                           <div class="col">
                               <div class="dropdown">
                               <a class="btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="fa-solid fa-screwdriver-wrench"></i>Ventas
+                              <i class="fa-solid fa-cash-register"></i>Ventas
                               </a>
                               <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="{{route('ajoutervente')}}">Añadir una Ventas</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                                  <li><a class="dropdown-item" href="{{route('ajoutervente')}}"><i class="fa-solid fa-plus"></i>Añadir una Ventas</a></li>
+                                  <li><a class="dropdown-item" href="{{route('listeventes')}}"><i class="fa-solid fa-list"></i>Lista ventes</a></li>
                               
                                 </ul>
                               </div>
@@ -64,7 +64,10 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
-                                  <li><a class="dropdown-item" href="{{route('updatestore')}}">Update store</a></li>
+                                  @if(Auth::user()->type=="admin")
+                                  <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
+                                  <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
+                                  @endif
                                 </ul>
                               </div>
                           </div>
