@@ -97,11 +97,11 @@
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Type</th>
-      <th scope="col">Created_at</th>
-      <th scope="col">Option</th>
+    <th scope="col">Nombre</th>
+      <th scope="col">Correo electrónico</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Creado_en</th>
+      <th scope="col">Opción</th>
      
     </tr>
   </thead>

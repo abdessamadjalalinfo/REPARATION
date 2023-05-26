@@ -118,20 +118,21 @@
                         <div class="form-check">
                             <input   class="form-check-input" type="radio" name="client" id="anonyme" value="anonyme" checked>
                             <label class="form-check-label" >
-                               Anonyme
+                            anónimo
                             </label>
                         </div>
                         <div class="form-check">
                             <input  class="form-check-input" type="radio" name="client" id="nouveau" value="nouveau">
                             <label  class="form-check-label" >
-                                Creer Client
+                            Crear cliente
+
                             </label>
                             
                         </div>
                         <div class="form-check">
                             <input  class="form-check-input" type="radio" name="client" id="existe" value="existe">
                             <label  class="form-check-label" >
-                                Client existant
+                            Cliente existente
                             </label>
                         </div>
                         </div>
@@ -144,13 +145,13 @@
                                     <input name="dni"type="text" class="form-control" id="recipient-name">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nom:</label>
+                                        <label for="recipient-name" class="col-form-label">apellido:</label>
                                         <input name="nom"type="text" class="form-control" id="recipient-name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Prenom:</label>
+                                        <label for="recipient-name" class="col-form-label">Nombre de pila:</label>
                                         <input name="prenom"type="text" class="form-control" id="recipient-name">
                                     </div>
                                 </div>
@@ -164,14 +165,14 @@
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Phone:</label>
+                                        <label for="recipient-name" class="col-form-label">Teléfono:</label>
                                         <input name="phone" type="text" class="form-control" id="recipient-name">
                                     </div>
                                 </div>
                             </div>
                            
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Adresse:</label>
+                                <label for="recipient-name" class="col-form-label">DIRECCIÓN:</label>
                                 <input name="adresse" type="text" class="form-control" id="recipient-name">
                             </div>
           
@@ -179,7 +180,7 @@
                         </div>
                         <div  style="display:none"  id="showexiste" class="myDiv">
                             <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Please Choose:</label>
+                            <label for="recipient-name" class="col-form-label">Por favor elige:</label>
                             <select name="id_client" class="form-select" aria-label="Default select example">
                                 @foreach($clients as $client)
                                 <option value="{{$client->id}}" selected>{{$client->nom}} {{$client->prenom}}</option>
@@ -191,19 +192,19 @@
 
                         </div>
                         <div class="alert alert-secondary" role="alert">
-                            Reparation
+                        Reparation
                         </div>
                         
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Libelle:</label>
+                                    <label for="recipient-name" class="col-form-label">Fraseología:</label>
                                     <input name="label" type="text" class="form-control" id="recipient-name">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Description:</label>
+                                    <label for="recipient-name" class="col-form-label">Descripción:</label>
                                     <input name="description" type="text" class="form-control" id="recipient-name">
                                 </div>
                             </div>
@@ -211,7 +212,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Categorie:</label>
+                                        <label for="recipient-name" class="col-form-label">Categoría:</label>
                                         <select class="form-select" name="categorie" id="categorie" >
                                     @foreach($categories as $categorie)
                                     <option value="{{$categorie->id}}" selected>{{$categorie->nom}}</option>
@@ -222,7 +223,7 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Marque:</label>
+                                    <label for="recipient-name" class="col-form-label">Marca:</label>
                                     <select name="marque_id"  class="form-select"id="sousCategorieSelect">
                                         <option value="">Sélectionnez une sous-catégorie</option>
                                     </select>             
@@ -232,9 +233,9 @@
                             <div class="row">
                             <div class="col">
                                     <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Modèle:</label>
+                                        <label for="recipient-name" class="col-form-label">Modelo:</label>
                                         <select name="modele"  class="form-select"id="modeleSelect">
-                                            <option value="">Sélectionnez le modèle</option>
+                                            <option value="">Seleccionar modelo</option>
                                         </select> 
                                     </div>
                             </div>
@@ -246,17 +247,17 @@
                             </div>
                         </div>
                         <div class="alert alert-secondary" role="alert">
-                          Photos
+                          Fotos
                         </div>
                         <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Images:</label>
+                                    <label for="recipient-name" class="col-form-label">Fotos:</label>
                                     <input name="images[]" multiple type="file" class="form-control" id="recipient-name">
                         </div>
                         <div class="alert alert-secondary" role="alert">
-                          Components
+                        Componentes
                         </div>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Components:</label>
+                            <label for="recipient-name" class="col-form-label">Componentes:</label>
                             <select name="components[]" multiple class="form-control" >
                                
                                 @foreach($components as $component)
@@ -266,7 +267,7 @@
                             </select>   
                         </div>
                         <div class="alert alert-secondary" role="alert">
-                          Checking
+                        Comprobación
                         </div>
                         <div class="row">
                             <div class="col">
@@ -278,7 +279,7 @@
                             <div class="col">
                             <input class="form-check-input" type="checkbox"  name="check[]"value="Screen" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Screen
+                            pantalla
                             </label>
                             </div>
                             <div class="col">
@@ -297,12 +298,12 @@ Camera
                          
                         
                         <div class="col mb-3">
-                                    <label for="recipient-name" class="col-form-label">Prix:</label>
+                                    <label for="recipient-name" class="col-form-label">Premio:</label>
                                     <input name="prix" type="number" class="form-control" id="recipient-name">
                         </div>
                         
                        
-                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
                     </form>
                     
 

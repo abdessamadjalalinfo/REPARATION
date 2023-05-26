@@ -93,16 +93,17 @@
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">Client</th>
-      <th scope="col">Categorie</th>
-      <th scope="col">Marque</th>
-      <th scope="col">Modele</th>
-      <th scope="col">Code</th>
-      <th scope="col">Status</th>
-      <th scope="col">Update</th>
-      <th scope="col">Prix</th>
-      <th scope="col">Date</th>
-      <th scope="col">Option</th>
+      
+<th scope="col">Cliente</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Código</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Actualizar</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Opción</th>
     </tr>
   </thead>
   <tbody>

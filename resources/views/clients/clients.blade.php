@@ -111,11 +111,11 @@
               <input name="dni"type="text" class="form-control" id="recipient-name">
             </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Nom:</label>
+            <label for="recipient-name" class="col-form-label">apellido:</label>
             <input name="nom"type="text" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Prenom:</label>
+            <label for="recipient-name" class="col-form-label">Nombre de pila:</label>
             <input name="prenom"type="text" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
@@ -123,16 +123,17 @@
             <input name="email" type="email" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Phone:</label>
+            <label for="recipient-name" class="col-form-label">
+Teléfono:</label>
             <input name="phone" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Adresse:</label>
+            <label for="recipient-name" class="col-form-label">DIRECCIÓN:</label>
             <input name="adresse" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-primary">Agregar</button>
       </div>
         </form>
       </div>
@@ -148,12 +149,12 @@
   <thead>
     <tr>
       <th scope="col">Dni/Nie/Pasaporte</th>
-      <th scope="col">Nom</th>
-      <th scope="col">Prénom</th>
+      <th scope="col">apellido</th>
+      <th scope="col">Nombre de pila</th>
       <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Adresse</th>
-      <th scope="col">Option</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">DIRECCIÓN</th>
+      <th scope="col">Opción</th>
     </tr>
   </thead>
   <tbody>
@@ -185,11 +186,11 @@
           <div class="mb-3">
           <input name="id"type="hidden" value="{{$client->id}}" class="form-control" id="recipient-name">
 
-            <label for="recipient-name" class="col-form-label">Nom:</label>
+            <label for="recipient-name" class="col-form-label">apellido:</label>
             <input name="nom"type="text" value="{{$client->nom}}" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Prenom:</label>
+            <label for="recipient-name" class="col-form-label">Nombre de pila:</label>
             <input name="prenom"type="text" value="{{$client->prenom}}"  class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
@@ -197,16 +198,16 @@
             <input name="email" type="email"value="{{$client->email}}"  class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Phone:</label>
+            <label for="recipient-name" class="col-form-label">Teléfono:</label>
             <input name="phone" type="text" value="{{$client->phone}}"  class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Adresse:</label>
+            <label for="recipient-name" class="col-form-label">DIRECCIÓN:</label>
             <input name="adresse" type="text" value="{{$client->adresse}}"  class="form-control" id="recipient-name">
           </div>
           <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Modifier</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerca</button>
+        <button type="submit" class="btn btn-primary">Editar</button>
       </div>
         </form>
               </div>

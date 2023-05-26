@@ -93,18 +93,18 @@
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">Client</th>
-      <th scope="col">Categorie</th>
-      <th scope="col">Marque</th>
-      <th scope="col">Modele</th>
-      <th scope="col">label</th>
+    <th scope="col">Cliente</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">etiqueta</th>
      
-      <th scope="col">Prix Unitaire</th>
-      <th scope="col">Quantité</th>
-      <th scope="col">Totale</th>
-      <th scope="col">Methode</th>
-      <th scope="col">Date</th>
-      <th scope="col">Option</th>
+      <th scope="col">Precio unitario</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Total</th>
+      <th scope="col">Método</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Opción</th>
     </tr>
   </thead>
   <tbody>

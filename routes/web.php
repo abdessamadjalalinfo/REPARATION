@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 })->middleware("auth");
 
 Auth::routes();
@@ -74,3 +74,5 @@ Route::get('/users', [App\Http\Controllers\ReparationController::class, 'users']
 Route::get('/admin/{id}', [App\Http\Controllers\ReparationController::class, 'admin'])->name('admin')->middleware("auth");
 
 Route::get('/deleteuser/{id}', [App\Http\Controllers\ReparationController::class, 'deleteuser'])->name('deleteuser')->middleware("auth");
+
+Route::get('/deletecomponent/{id}', [App\Http\Controllers\ReparationController::class, 'deletecomponent'])->name('deletecomponent')->middleware("auth");

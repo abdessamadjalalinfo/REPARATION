@@ -77,9 +77,12 @@
 
 
                    </div>
+                   
                 </div>
+                
             </div>
         </div>
+        
     </div>
     
     <br>
@@ -140,7 +143,9 @@
 </form>
       </div>
       
+      
     </div>
+    
   </div>
 </div>
 
@@ -167,6 +172,21 @@
         </ul>
         </div>
         <br>
+        
+        <div class="card" style="">
+            <div class="card-header">
+                Component
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach($components as $component)
+                <li class="list-group-item"> <i style="color:green"class="fa-solid fa-check"></i>{{App\Models\Component::find($component->component_id)->nom}}
+              <a href="{{route('deletecomponent',$component->component_id)}}" class="btn btn-danger">-</a>
+              </li>
+                @endforeach
+            </ul>
+        </div>
+        <br>
+
         <div class="card" style="">
             <div class="card-header">
                 Checking
@@ -275,9 +295,7 @@
         </div>
     </div>
 
-    <div class="col-6">
-        
-    </div>    
+      
 </div>    
     </div>
 </div>

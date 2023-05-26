@@ -236,7 +236,8 @@ class ReparationController extends Controller
         $client=Client::find($reparation->client_id);
         $photos=Photo::where('reparation_id',$reparation->id)->get();
         $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
-        $components=ReparationCheck::where('reparation_id',$reparation->id)->get();
+        $components=ReparationCompo::where('reparation_id',$reparation->id)->get();
+        //dd( $components);
         $status=Historique::where('reparation_id',$reparation->id)->get();
         $categories=Categorie::all();
         return view('reparation.check',
@@ -421,6 +422,12 @@ class ReparationController extends Controller
         $user=User::find($id);
        
         $user->delete();
+        return back();
+    }
+    public function deletecomponent($id)
+    {
+        $component=ReparationCompo::find($id);
+        $component->delete();
         return back();
     }
 }
