@@ -65,6 +65,7 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addcomponent')}}">Add Component</a></li>
                                   @if(Auth::user()->type=="admin")
                                   <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
                                   <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
@@ -118,8 +119,13 @@
   <thead>
     <tr>
       <th scope="col">Id</th>
-      <th scope="col">Modele</th>
+      <th scope="col">Categorie</th>
       <th scope="col">Mark</th>
+      <th scope="col">Modele</th>
+      
+      <th scope="col">número de ventas</th>
+      <th scope="col">Número de reparación</th>
+      <th scope="col">Option</th>
      
       
     </tr>
@@ -128,9 +134,21 @@
     @foreach($modeles as $modele)
   <tr>
       <th scope="row">{{$modele->id}}</th>
-      <td>{{$modele->nom}}</td>
-     
+      <td>{{$modele->marque->categorie->nom}}</td>
       <td>{{$modele->marque->nom}}</td>
+      <td>{{$modele->nom}}</td>
+      <td>{{$modele->ventes()->count()}}</td>
+      <td>{{$modele->reparations()->count()}}</td>
+      <td>
+      @if($modele->reparations()->count() +$modele->ventes()->count()  ==0)
+
+        <a class="btn btn-danger"  href="{{route('deletemodele',$modele->id)}}"><i class="fa-solid fa-x"></i></a>
+        @else
+        <a disabled class="btn btn-danger"  href="#">no puedes borrar</a>
+
+        @endif
+        </td>
+      
       
     </tr>
     @endforeach

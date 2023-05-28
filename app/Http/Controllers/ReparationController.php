@@ -430,4 +430,78 @@ class ReparationController extends Controller
         $component->delete();
         return back();
     }
+    public function deletecategorie($id)
+    {
+        $categorie=Categorie::find($id);
+        if($categorie)
+        {
+            $marques=$categorie->marques()->get();
+            if($marques)
+            {
+            foreach($marques as $marque)
+            {
+                $modeles=$marque->modeles()->get();
+                if($modeles)
+                {
+                    foreach($modeles as $modele)
+                {
+                    $modele->delete();
+                    //echo $modele;
+                }
+
+                }
+                
+                $marque->delete();
+            }
+
+            }
+            
+            $categorie->delete();
+        }
+        
+        return back();
+    }
+
+    public function deletemarques($id)
+    {
+        $marque=Marque::find($id);
+        $modeles=$marque->modeles()->get();
+                if($modeles)
+                {
+                    foreach($modeles as $modele)
+                {
+                    $modele->delete();
+                    //echo $modele;
+                }
+
+                }
+                
+        $marque->delete();
+        return back();
+    }
+    public function deletemodele($id)
+    {
+        $modele=Modele::find($id);
+        $modele->delete();
+        return back();
+    }
+    public function addcomponent()
+    {
+        $components=Component::all();
+        return view('addcomponent',['components'=>$components]);
+    }
+    public function deletecomponente($id)
+    {
+        $component=Component::find($id);
+        $component->delete();
+        return back();
+    }
+    public function addingcomponent(Request $request)
+    {
+        $component=new Component();
+        $component->nom=$request->nom;
+        $component->save();
+        return back();
+    }
+
 }

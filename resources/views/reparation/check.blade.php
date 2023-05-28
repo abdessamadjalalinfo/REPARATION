@@ -65,6 +65,7 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addcomponent')}}">Add Component</a></li>
                                   @if(Auth::user()->type=="admin")
                                   <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
                                   <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
@@ -175,7 +176,7 @@
         
         <div class="card" style="">
             <div class="card-header">
-                Component
+                Component 
             </div>
             <ul class="list-group list-group-flush">
                 @foreach($components as $component)
