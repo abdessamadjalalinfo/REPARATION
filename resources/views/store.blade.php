@@ -15,6 +15,7 @@
                     @endif
 
                    <div class="row">
+                  
                         
                    <div class="col">
                               <div class="dropdown">
@@ -83,12 +84,13 @@
             <div style="text-align:center" class="alert alert-primary" role="alert">
             Update your store
             </div>
+            <img width="120" src="images\{{\App\Models\Store::find(1)->logo}}">
             @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block">
                 <strong>{{$message}}</strong>
             </div>
 
-            <img src="{{ asset('images/'.Session::get('image')) }}" />
+           
                 @endif
             <form method="post" action="{{ route('update.store') }}" enctype="multipart/form-data">        
                     <div class="row">
