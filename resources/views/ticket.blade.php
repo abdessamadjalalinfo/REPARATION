@@ -12,6 +12,7 @@
         margin-bottom: 0px;
         
          margin-left: 18px;
+         font-size: 10px;
 
     }
     
@@ -39,7 +40,8 @@
                 <p>Whatssap: {{$store->whatssap}}</p>
                 <p> </p>
                     <p><strong>------------------------------------</strong></p>
-                    
+                    <p><strong>ID</strong> R-{{$reparation->id}}</p>
+
                     <p><strong>Nombre</strong> {{$reparation->client->nom}}{{$reparation->client->prenom}}</p>
                     <p><strong>NIF/CIF:</strong> {{$reparation->client->dni}}</p>
                     <p><strong>Teléfono:</strong> {{$reparation->client->phone}}</p>
@@ -50,7 +52,9 @@
                     <p><strong>Marca:</strong> {{$reparation->marque->nom}}</p>
                     <p><strong>IMEI/SN:</strong>{{$reparation->code}}</p>
                     <p><strong>Modelo:</strong>{{$reparation->modele->nom}}</p>
-                    <p><strong>Coste estimado:</strong>{{$reparation->prix}} </p>
+                    <p><strong>Premio de los componentes:</strong>{{$reparation->price_components}} €</p>
+                    <p><strong>Coste estimado:</strong>{{$reparation->prix}}€ </p>
+
                     <p><strong>------------------------------------</strong></p>
                     <p><strong 
 >{{$store->email}}</strong> </p>

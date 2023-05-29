@@ -58,7 +58,8 @@
                     <p> <strong>MODELO</strong>  {{$reparation->modele->nom}}         </p>
                     <p> <strong>SN/IMEI</strong>    {{$reparation->code}}     </p>
                     <p> <strong>FALLO</strong>         </p>
-                    <p> <strong>COSTE ESTIMADO:</strong>  {{$reparation->prix}}       </p>
+                    <p> <strong>Precios de los componentes:</strong>  {{$reparation->price_components}}€    </p>
+                    <p> <strong>COSTE ESTIMADO:</strong>  {{$reparation->prix}}€       </p>
                     <p> <strong>OBSERVACIONES</strong>    {{$reparation->description}}      </p>
                 </div>
                 <div class="col-6">

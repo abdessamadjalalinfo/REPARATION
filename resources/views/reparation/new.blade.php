@@ -9,6 +9,7 @@
 } 
 </style>
 <div class="container">
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -72,6 +73,8 @@
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
                                   <li><a class="dropdown-item" href="{{route('addcomponent')}}">Add Component</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addcheck')}}">Add Check</a></li>
+
                                   @if(Auth::user()->type=="admin")
                                   <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
                                   <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
@@ -226,7 +229,10 @@
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Marca:</label>
                                     <select name="marque_id"  class="form-select"id="sousCategorieSelect">
-                                        <option value="">Sélectionnez une sous-catégorie</option>
+                                    @foreach($marques as $marque)
+                                    <option value="{{$marque->id}}">{{$marque->nom}}</option>
+                                    @endforeach    
+                                    
                                     </select>             
                                 </div>
                             </div>
@@ -236,7 +242,9 @@
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Modelo:</label>
                                         <select name="modele"  class="form-select"id="modeleSelect">
-                                            <option value="">Seleccionar modelo</option>
+                                        @foreach($modeles as $modele)
+                                    <option value="{{$modele->id}}">{{$modele->nom}}</option>
+                                    @endforeach 
                                         </select> 
                                     </div>
                             </div>
@@ -256,6 +264,18 @@
                         </div>
                         <div class="alert alert-secondary" role="alert">
                         Componentes 
+                            
+
+
+
+
+
+
+
+
+
+
+
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Componentes:</label>
@@ -271,32 +291,23 @@
                         Comprobación
                         </div>
                         <div class="row">
+                           
+                            @foreach($checks as $check)
                             <div class="col">
-                            <input class="form-check-input" type="checkbox" name="check[]"value="Battery" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-  Battery
-  </label>
+                                <input class="form-check-input" type="checkbox" name="check[]"value="{{$check->nom}}" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                               {{$check->nom}}
+                                </label>
                             </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox"  name="check[]"value="Screen" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                            pantalla
-                            </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" name="check[]"value="Micro"id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Micro
-  </label>
-                            </div>
-                            <div class="col">
-                            <input class="form-check-input" type="checkbox" name="check[]"value="Camera"id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-Camera
-  </label>
-                            </div>
+                            @endforeach
+                           
+                           
+                           
                         </div> 
-                         
+                        <div class="col mb-3">
+                                    <label for="recipient-name" class="col-form-label">premio de los componentes:</label>
+                                    <input name="price_components" type="number" class="form-control" id="recipient-name">
+                        </div>
                         
                         <div class="col mb-3">
                                     <label for="recipient-name" class="col-form-label">Premio:</label>

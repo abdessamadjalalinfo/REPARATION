@@ -86,3 +86,15 @@ Route::get('/addcomponent', [App\Http\Controllers\ReparationController::class, '
 Route::get('/deletecomponente/{id}', [App\Http\Controllers\ReparationController::class, 'deletecomponente'])->name('deletecomponente')->middleware("auth");
 Route::get('/addingcomponent', [App\Http\Controllers\ReparationController::class, 'addingcomponent'])->name('addingcomponent')->middleware("auth");
 
+Route::get('/addcheck', [App\Http\Controllers\ReparationController::class, 'addcheck'])->name('addcheck')->middleware("auth");
+
+
+Route::get('/addingcheck', [App\Http\Controllers\ReparationController::class, 'addingcheck'])->name('addingcheck')->middleware("auth");
+
+Route::get('/deletecheck/{id}', [App\Http\Controllers\ReparationController::class, 'deletecheck'])->name('deletecheck')->middleware("auth");
+
+Route::get('/addcomponent_to_reparation', [App\Http\Controllers\ReparationController::class, 'addcomponent_to_reparation'])->name('addcomponent_to_reparation')->middleware("auth");
+
+Route::get('/addcheck_to_reparation', [App\Http\Controllers\ReparationController::class, 'addcheck_to_reparation'])->name('addcheck_to_reparation')->middleware("auth");
+Route::get('/rechercher-reparations', [App\Http\Controllers\ReparationController::class, 'rechercher'])->name('rechercher')->middleware("auth");
+Route::get('/rechercher-ventes', [App\Http\Controllers\ReparationController::class, 'recherchervente'])->name('recherchervente')->middleware("auth");

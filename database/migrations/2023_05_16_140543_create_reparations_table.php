@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('model_id');
             $table->foreign('model_id')->references('id')->on('models');
             $table->string("code")->default("none");
+            $table->string("price_components")->default("0");
             $table->string("status")->default("reparation");
             $table->string("description")->default("description none");
             $table->string("prix")->default("0");

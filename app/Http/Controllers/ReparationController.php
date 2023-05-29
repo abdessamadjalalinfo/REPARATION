@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Check;
 use App\Models\Component;
 use App\Models\Historique;
 use App\Models\Photo;
@@ -9,6 +10,7 @@ use App\Models\Reparation;
 use App\Models\ReparationCheck;
 use App\Models\ReparationCompo;
 use App\Models\Store;
+use App\Models\Vente;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\Models\Client;
@@ -24,11 +26,17 @@ class ReparationController extends Controller
     {
         $clients=Client::all();
         $categories=Categorie::all();
+        $marques=Marque::all();
+        $modeles=Modele::all();
+
         $components=Component::all();
+        $checks=Check::all();
 
         return view("reparation.new",['clients'=>$clients,
         'categories'=>$categories,
-        'components'=>$components
+        'components'=>$components,
+        'checks'=>$checks,'marques'=>$marques,
+        "modeles"=>$modeles
     ]);
     }
     public function clients()
@@ -104,8 +112,23 @@ class ReparationController extends Controller
         $reparation->code=$request->code;
         $reparation->description=$request->description;
         $reparation->prix=$request->prix;
+        $reparation->price_components=$request->price_components;
         $reparation->save();
         return back();
+    }
+
+    public function rechercher(Request $request)
+    {
+        $recherche = $request->input('recherche');
+        $reparations = Reparation::where('id', 'LIKE', "%$recherche%")->get();
+        return view('resultats', compact('reparations'));
+    }
+    
+    public function recherchervente(Request $request)
+    {
+        $recherche = $request->input('recherche');
+        $ventes = Vente::where('id', 'LIKE', "%$recherche%")->get();
+        return view('resultatsvente', compact('ventes'));
     }
 
 
@@ -126,6 +149,8 @@ class ReparationController extends Controller
             $reparation->code=$request->code;
             $reparation->description=$request->description;
             $reparation->prix=$request->prix;
+            $reparation->price_components=$request->price_components;
+            
             $reparation->save();
         }
         if($request->client=="nouveau")
@@ -152,11 +177,12 @@ class ReparationController extends Controller
             $reparation->label=$request->label;
             $reparation->client_id=$client->id;
             $reparation->categorie_id=$request->categorie;
-            $reparation->marque_id=$request->marque;
+            $reparation->marque_id=$request->marque_id;
             $reparation->model_id=$request->modele;
             $reparation->code=$request->code;
             $reparation->description=$request->description;
             $reparation->prix=$request->prix;
+            $reparation->price_components=$request->price_components;
             $reparation->save();
         }
         if($request->client=="existe")
@@ -165,11 +191,12 @@ class ReparationController extends Controller
             $reparation->label=$request->label;
             $reparation->client_id=$request->id_client;
             $reparation->categorie_id=$request->categorie;
-            $reparation->marque_id=$request->marque;
+            $reparation->marque_id=$request->marque_id;
             $reparation->model_id=$request->modele;
             $reparation->code=$request->code;
             $reparation->description=$request->description;
             $reparation->prix=$request->prix;
+            $reparation->price_components=$request->price_components;
             $reparation->save();
         }
         foreach($request->components as $x){
@@ -199,15 +226,15 @@ class ReparationController extends Controller
                 $imagePath = $imageFile->move( 'images', $imageName,);
     
                 $image = Photo::create([
-                    'reparation_id' => 1,
+                    'reparation_id' => $reparation->id,
                     'path' => $imagePath,
                 ]);
     
                 $uploadedImages[] = $image;
             }
-            return redirect()->back()->with('success', 'Les images ont été uploadées avec succès !');
+            return redirect()->back()->with('success', 'bien grabado!');
         }
-        return redirect()->back()->with('error', 'Une erreur s\'est produite lors de l\'upload des images.');
+        return redirect()->back()->with('error', 'Se ha producido un error');
 
     }
 
@@ -238,6 +265,10 @@ class ReparationController extends Controller
         $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
         $components=ReparationCompo::where('reparation_id',$reparation->id)->get();
         //dd( $components);
+        $compos=Component::all();
+        $checklists=Check::all();
+
+
         $status=Historique::where('reparation_id',$reparation->id)->get();
         $categories=Categorie::all();
         return view('reparation.check',
@@ -248,7 +279,10 @@ class ReparationController extends Controller
         'checks'=>$checks,
         'components'=>$components,
         'status'=>$status,
-        'categories'=>$categories
+        'categories'=>$categories,
+        'compos'=>$compos,
+        'checklists'=>$checklists
+
     ]);
     }
 
@@ -503,5 +537,54 @@ class ReparationController extends Controller
         $component->save();
         return back();
     }
+    public function addcheck()
+    {
+        $checks=Check::all();
+        return view('addcheck',['checks'=>$checks]);
+    }
+    public function addingcheck(Request $request)
+    {
+        $check=new Check();
+        $check->nom=$request->nom;
+        $check->save();
+        return back();
+    }
+    public function deletecheck($id)
+    {
+        $check=Check::find($id);
+        $check->delete();
+        return back();
+    }
+
+    public function addcomponent_to_reparation(Request $request)
+    {
+        $x=ReparationCompo::where('reparation_id',$request->reparation_id)->where('component_id',$request->component)->get();
+        if($x->count()==0)
+        { $reparationcompo=new ReparationCompo();
+            $reparationcompo->reparation_id=$request->reparation_id;
+            $reparationcompo->component_id=$request->component;
+            $reparationcompo->save();
+            return back();
+
+        }
+        return back();
+       
+    }
+    
+    public function addcheck_to_reparation(Request $request)
+    {
+        $x=ReparationCheck::where('reparation_id',$request->reparation_id)->where('description',$request->check)->get();
+        if($x->count()==0)
+        { $reparationcheck=new ReparationCheck();
+            $reparationcheck->reparation_id=$request->reparation_id;
+            $reparationcheck->description=$request->check;
+            $reparationcheck->save();
+            return back();
+
+        }
+        return back();
+       
+    }
+
 
 }

@@ -33,7 +33,7 @@
                 <p>Tel: {{$store->phone}}</p>
                 <p>Whatssap: {{$store->whatssap}}</p>
                     <p><strong>------------------------------------</strong></p>
-                    
+                    <p><strong>ID: </strong>V-{{$vente->id}}</p>
                     <p><strong>Nombre</strong> {{$vente->client->nom}} {{$vente->client->prenom}}</p>
                     <p><strong>NIF/CIF:</strong> {{$vente->client->dni}}</p>
                     <p><strong>Teléfono:</strong> {{$vente->client->phone}}</p>

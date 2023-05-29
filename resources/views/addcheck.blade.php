@@ -1,6 +1,5 @@
 @extends('layouts.app')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -74,8 +73,6 @@
                                 </ul>
                               </div>
                           </div>
-                        
-                       
                        
                        
 
@@ -85,124 +82,60 @@
             </div>
         </div>
     </div>
-    <br>
-    
-
-    <div class="alert alert-primary" role="alert">
-  Ventes  <input type="text" id="recherche" name="recherche" placeholder="buscar una ventas">
 </div>
-
+<div class="container">
+<div class="row">
+    <div class="col-2">
+    <form action="{{route('addingcheck')}}">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Check</label>
+    <input name="nom" type="text" class="form-control" >
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+    </div>
+    <div class="col-8">
     <table class="table">
   <thead>
     <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Cliente</th>
-      <th scope="col">Categoría</th>
-      <th scope="col">Marca</th>
-      <th scope="col">Modelo</th>
-      <th scope="col">etiqueta</th>
-     
-      <th scope="col">Precio unitario</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Total</th>
-      <th scope="col">Método</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Opción</th>
+      <th scope="col">Id</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Nombre del checks</th>
+      <th scope="col">Option</th>
+      
     </tr>
   </thead>
   <tbody>
-  @foreach($ventes as $vente) 
+    @foreach($checks as $check)
   <tr>
-  <td scope="col">V-{{$vente->id}}</td>
-      <th scope="row">{{App\Models\Client::find($vente->client_id)->dni}}: {{App\Models\Client::find($vente->client_id)->nom}} {{App\Models\Client::find($vente->client_id)->prenom}}</th>
-      <td>{{App\Models\Categorie::find($vente->categorie_id)->nom}}</td>
-      <td>{{App\Models\Marque::find($vente->marque_id)->nom}}</td>
-      <td>{{App\Models\Modele::find($vente->model_id)->nom}}</td>
-      <td>{{$vente->label}}</td>
-      
-        </td>
+      <th scope="row">{{$check->id}}</th>
+      <td>{{$check->nom}}</td>
+      <td>
+      @php
+        $x=\App\Models\ReparationCheck::where('description',$check->nom)->count();
+        
+        @endphp
+        {{$x}}
       </td>
-      <td>{{$vente->prix}}</td>
-      <td>{{$vente->quantite}}</td>
-      <td>{{$vente->totale}}</td>
-      <td>{{$vente->methode}}</td>
-      <td>{{$vente->created_at}}</td>
-      <td> 
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#e{{$vente->id}}" data-bs-whatever="@getbootstrap"><i class="fa-solid fa-pen-to-square"></i></button>
-
-<div class="modal fade" id="e{{$vente->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">{{App\Models\Categorie::find($vente->categorie_id)->nom}} : {{App\Models\Marque::find($vente->marque_id)->nom}} {{App\Models\Modele::find($vente->model_id)->nom}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="{{route('editvente')}}">
-        <input value="{{$vente->id}}"type="hidden" name="id" class="form-control" id="recipient-name">
-
-        <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Quantite:</label>
-            <input value="{{$vente->quantite}}"type="number" name="quantite" class="form-control" id="recipient-name">
-          </div>  
-        <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Prix:</label>
-            <input value="{{$vente->prix}}"type="number" name="prix" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Methode de paiement:</label>
-            <select class="form-select" name="method" id="categorie" >
-                                    
-                                    <option value="cash" selected>Cash</option>
-                                    <option value="carte" selected>Carte</option>
-                                    <option value="paypal" selected>Paypal</option>
-
-                                    
-                                    
-                                </select>           </div>
-                                <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">edit</button>
-      </div>
-        </form>
-      </div>
       
-    </div>
-  </div>
-</div>
-        <a href="{{route('deletevente',$vente->id)}}"class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-      
+     
+      <td>
+       
+        
+        @if($x==0)
+
+        <a class="btn btn-danger"  href="{{route('deletecheck',$check->id)}}"><i class="fa-solid fa-x"></i></a>
+        @endif
+        
       </td>
-      <td><a href="{{route('ticketvente',$vente->id)}}" target="_blank"><i class="fa-solid fa-ticket"></i></a></td>
-
+      </td>
+      
     </tr>
     @endforeach
-    
   </tbody>
 </table>
-
-{{ $ventes->render() }}
     </div>
 </div>
-
-
-<script>
-        $(document).ready(function() {
-            $('#recherche').on('input', function() {
-                var recherche = $(this).val();
-                $.ajax({
-                    url: '/rechercher-ventes',
-                    type: 'GET',
-                    data: {
-                        recherche: recherche
-                    },
-                    success: function(response) {
-                        $('tbody').html(response);
-                    }
-                });
-            });
-        });
-    </script>
-
-
+</div>
 @endsection

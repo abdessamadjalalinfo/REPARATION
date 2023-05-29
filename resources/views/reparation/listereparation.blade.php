@@ -66,6 +66,7 @@
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
                                   <li><a class="dropdown-item" href="{{route('addcomponent')}}">Add Component</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addcheck')}}">Add Check</a></li>
                                   @if(Auth::user()->type=="admin")
                                   <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
                                   <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
@@ -88,13 +89,14 @@
     
 
     <div class="alert alert-primary" role="alert">
-  Reparations
+  Reparations     <input type="text" id="recherche" name="recherche" placeholder="buscar una reparacion">
+
 </div>
 
     <table class="table">
   <thead>
     <tr>
-      
+    <th scope="col">ID</th>  
 <th scope="col">Cliente</th>
       <th scope="col">Categoría</th>
       <th scope="col">Marca</th>
@@ -110,6 +112,8 @@
   <tbody>
   @foreach($reparations as $reparation) 
   <tr>
+  <th scope="row">R-{{$reparation->id}}</th>
+
       <th scope="row">{{App\Models\Client::find($reparation->client_id)->dni}}: {{App\Models\Client::find($reparation->client_id)->nom}} {{App\Models\Client::find($reparation->client_id)->prenom}}</th>
       <td>{{App\Models\Categorie::find($reparation->categorie_id)->nom}}</td>
       <td>{{App\Models\Marque::find($reparation->marque_id)->nom}}</td>
@@ -166,6 +170,25 @@
                     },
                     error: function(xhr) {
                         alert('Une erreur s\'est produite lors de la mise à jour de la colonne.');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+<script>
+        $(document).ready(function() {
+            $('#recherche').on('input', function() {
+                var recherche = $(this).val();
+                $.ajax({
+                    url: '/rechercher-reparations',
+                    type: 'GET',
+                    data: {
+                        recherche: recherche
+                    },
+                    success: function(response) {
+                        $('tbody').html(response);
                     }
                 });
             });

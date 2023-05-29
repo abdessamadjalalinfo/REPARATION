@@ -12,21 +12,24 @@
 
     <div class="container mt-2">
 
-        
-                
-            
+        <div class="row">
             <div class="col-1">
                 <div >
-                    {!! QrCode::size(100)->generate($reparation->id) !!}
+                    {!! QrCode::size(50)->generate($reparation->id) !!}
                 
                 </div>
             </div> 
-            <div class="col-2">
-                <p>{{$reparation->created_at}}</p>
-                <p>{{App\Models\Categorie::find($reparation->categorie_id)->nom}}\{{App\Models\Marque::find($reparation->marque_id)->nom}}</p>
-                <p>{{App\Models\Modele::find($reparation->model_id)->nom}}</p> 
-                <p>{{$reparation->client->nom}} {{$reparation->client->prenom}}</p>   
+            <div  class="col-2">
+                <p style="font-size: 7px;margin-top: 0px;margin-bottom: 0px;">{{$reparation->created_at}}</p>
+                <p  style="font-size: 7px;margin-top: 0px;margin-bottom: 0px;">{{App\Models\Categorie::find($reparation->categorie_id)->nom}}\{{App\Models\Marque::find($reparation->marque_id)->nom}}</p>
+                <p  style="font-size: 7px;margin-top: 0px;margin-bottom: 0px;">{{App\Models\Modele::find($reparation->model_id)->nom}}</p> 
+                <p  style="font-size: 7px;margin-top: 0px;margin-bottom: 0px;">{{$reparation->client->nom}} {{$reparation->client->prenom}}</p>   
             </div> 
+        </div>
+                
+            
+
+           
               
             
             

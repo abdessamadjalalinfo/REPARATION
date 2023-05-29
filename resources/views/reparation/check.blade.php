@@ -66,6 +66,7 @@
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
                                   <li><a class="dropdown-item" href="{{route('addcomponent')}}">Add Component</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addcheck')}}">Add Check</a></li>
                                   @if(Auth::user()->type=="admin")
                                   <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
                                   <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
@@ -89,7 +90,14 @@
     <br>
 
     <div class="alert alert-primary" role="alert">
-  Reparations
+  Reparations 
+    </div>
+    <div class="container row">
+      @foreach($reparation->photos()->get() as $photo)
+      <div class="card" style="width: 18rem;">
+        <div class="col-1"> <img width="100" src="{{asset($photo->path)}}"></div>
+      </div>
+        @endforeach
     </div>
     <div class="container row">
         <div class="col-1"><a href="{{route('facture',$reparation->id)}}" target="_blank" class="btn btn-success"><i class="fa-solid fa-ticket"></i>Facture</a></div>
@@ -176,12 +184,44 @@
         
         <div class="card" style="">
             <div class="card-header">
-                Component 
+                Component <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+agregar componentes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('addcomponent_to_reparation')}}">
+          <input type="hidden" name="reparation_id" value="{{$reparation->id}}">
+        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Componentes:</label>
+                            <select name="component"  class="form-control" >
+                               
+                                @foreach($compos as $compo)
+                            <option value="{{$compo->id}}" >{{$compo->nom}}</option>
+                                @endforeach
+                               
+                            </select>   
+       </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+        <button type="submit" class="btn btn-primary">agregar</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div> 
             </div>
             <ul class="list-group list-group-flush">
                 @foreach($components as $component)
                 <li class="list-group-item"> <i style="color:green"class="fa-solid fa-check"></i>{{App\Models\Component::find($component->component_id)->nom}}
-              <a href="{{route('deletecomponent',$component->component_id)}}" class="btn btn-danger">-</a>
+              <a href="{{route('deletecomponent',$component->id)}}" class="btn btn-danger">-</a>
               </li>
                 @endforeach
             </ul>
@@ -191,6 +231,46 @@
         <div class="card" style="">
             <div class="card-header">
                 Checking
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalchecking" data-bs-whatever="@getbootstrap">+</button>
+
+<div class="modal fade" id="exampleModalchecking" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">comprobación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('addcheck_to_reparation')}}">
+        <input type="hidden" name="reparation_id" value="{{$reparation->id}}">
+
+        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Checks:</label>
+                            <select name="check"  class="form-control" >
+                               
+                                @foreach($checklists as $checklist)
+                            <option value="{{$checklist->nom}}" >{{$checklist->nom}}</option>
+                                @endforeach
+                               
+                            </select>   
+       </div>
+          
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+        <button type="submit" class="btn btn-primary">agregar</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
             </div>
             <ul class="list-group list-group-flush">
                 @foreach($checks as $check)
@@ -231,6 +311,10 @@
             <label for="recipient-name" class="col-form-label">Label:</label>
             <input name="label"type="text" value="{{$reparation->label}}" class="form-control" id="recipient-name">
           </div>
+          <div class="col mb-3">
+                                    <label for="recipient-name" class="col-form-label">premio de los componentes:</label>
+                                    <input value="{{$reparation->price_components}}" name="price_components" type="number" class="form-control" id="recipient-name">
+                        </div>
           <div class="mb-3">
 
             <label for="recipient-name" class="col-form-label">Prix:</label>
@@ -284,6 +368,8 @@
 
             </div>
             <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID : R-{{$reparation->id}} </li>
+
                 <li class="list-group-item">Categorie : {{App\Models\Categorie::find($reparation->categorie_id)->nom}} </li>
                 <li class="list-group-item">Marque : {{App\Models\Marque::find($reparation->marque_id)->nom}}</li>
                 <li class="list-group-item">Modele : {{App\Models\Modele::find($reparation->model_id)->nom}}</li>
@@ -291,8 +377,10 @@
                 <li class="list-group-item"><i class="fa-solid fa-tag"></i>Label : {{$reparation->label}}</li>
                 <li class="list-group-item"><i class="fa-solid fa-comment"></i>Description : {{$reparation->description}}</li>
                 <li class="list-group-item"><i class="fa-solid fa-calendar-days"></i>Date : {{$reparation->created_at}}</li>
-                <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i>Prix : {{$reparation->prix}}</li>
-            </ul>
+                <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i>premio de los componentes : {{$reparation->price_components}} €</li>
+                <li class="list-group-item"><i class="fa-solid fa-dollar-sign"></i>Prix : {{$reparation->prix}} €</li>
+
+              </ul>
         </div>
     </div>
 
