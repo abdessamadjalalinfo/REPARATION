@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -84,55 +84,48 @@
 </div>
 <div class="container">
 <div class="row">
-    <div class="col-4">
-    <form action="{{route('addingmarque')}}">
-    <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Categorie</label>
-                <select name="categorie_id"  class="form-select"id="modeleSelect">
-                @foreach($categories as $categorie)
-                <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
-            @endforeach    
-    </select> 
-    </div>
-    <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Marque</label>
-    <input name="nom" type="text" class="form-control" >
+    <div class="col-2">
+    <form action="{{route('addingcomponent')}}">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Component</label>
+    <input required name="nom" type="text" class="form-control" >
   </div>
-  
   
   <button type="submit" class="btn btn-primary">Add</button>
 </form>
     </div>
     <div class="col-8">
-        <h6>Marque</h6>
     <table class="table">
   <thead>
     <tr>
       <th scope="col">Id</th>
-      <th scope="col">Categorie</th>
-      <th scope="col">Mark</th>
-      <th scope="col">número de ventas</th>
-      <th scope="col">Número de reparación</th>
-      <th scope="col">Option</th>
+      <th scope="col">Nom</th>
       
+      <th scope="col">Nombre del componente</th>
+      <th scope="col">Option</th>
       
     </tr>
   </thead>
   <tbody>
-    @foreach($marques as $marque)
+    @foreach($components as $component)
   <tr>
-      <th scope="row">{{$marque->id}}</th>
-      <td scope="row">
-      {{App\Models\Categorie::find($marque->categorie_id)->nom}}  
-      </td>
-      <td>{{$marque->nom}}</td>
-      <td>{{$marque->ventes()->count()}}</td>
-      <td>{{$marque->reparations()->count()}}</td>
+      <th scope="row">{{$component->id}}</th>
+      <td>{{$component->nom}}</td>
+      
+    
       <td>
+      @php
+        $x=\App\Models\ReparationCompo::where('component_id',$component->id)->count();
         
-        @if($marque->reparations()->count() +$marque->ventes()->count()  ==0)
+        @endphp
+        {{$x}}
+      </td>
+      <td>
+       
+        
+        @if($x==0)
 
-        <a class="btn btn-danger"  href="{{route('deletemarques',$marque->id)}}"><i class="fa-solid fa-x"></i></a>
+        <a class="btn btn-danger"  href="{{route('deletecomponente',$component->id)}}"><i class="fa-solid fa-x"></i></a>
         @endif
         
       </td>

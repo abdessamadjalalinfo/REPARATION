@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -64,6 +64,7 @@
                                   <li><a class="dropdown-item" href="{{route('addcategorie')}}">Add Catégorie</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmarque')}}">Add Marque</a></li>
                                   <li><a class="dropdown-item" href="{{route('addmodele')}}">Add Modele</a></li>
+                                  <li><a class="dropdown-item" href="{{route('addcomponent')}}">Add Component</a></li>
                                   @if(Auth::user()->type=="admin")
                                   <li><a class="dropdown-item" href="{{route('updatestore')}}"><i class="fa-solid fa-store"></i>Update store</a></li>
                                   <li><a class="dropdown-item" href="{{route('users')}}"><i class="fa-solid fa-users"></i>Users</a></li>
@@ -99,6 +100,9 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Nom</th>
+      <th scope="col">número de ventas</th>
+      <th scope="col">Número de reparación</th>
+      <th scope="col">Option</th>
       
     </tr>
   </thead>
@@ -107,6 +111,17 @@
   <tr>
       <th scope="row">{{$categorie->id}}</th>
       <td>{{$categorie->nom}}</td>
+      
+      <td>{{$categorie->ventes()->count()}}</td>
+      <td>{{$categorie->reparations()->count()}}</td>
+      <td>
+        
+        @if($categorie->reparations()->count() +$categorie->ventes()->count()  ==0)
+
+        <a class="btn btn-danger"  href="{{route('deletecategorie',$categorie->id)}}"><i class="fa-solid fa-x"></i></a>
+        @endif
+        
+      </td>
       
     </tr>
     @endforeach
