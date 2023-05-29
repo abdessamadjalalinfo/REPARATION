@@ -586,5 +586,37 @@ class ReparationController extends Controller
        
     }
 
+    public function reparation_client($id)
+    {
+      
+        $reparation=Reparation::find($id);
+        $client=Client::find($reparation->client_id);
+        $photos=Photo::where('reparation_id',$reparation->id)->get();
+        $checks=ReparationCheck::where('reparation_id',$reparation->id)->get();
+        $components=ReparationCompo::where('reparation_id',$reparation->id)->get();
+        //dd( $components);
+        $compos=Component::all();
+        $checklists=Check::all();
+
+
+        $status=Historique::where('reparation_id',$reparation->id)->get();
+        $categories=Categorie::all();
+        return view('reparation',
+        [
+            'client'=>$client,
+            'reparation'=>$reparation,
+            'photos'=>$photos,
+            'checks'=>$checks,
+            'components'=>$components,
+            'status'=>$status,
+            'categories'=>$categories,
+            'compos'=>$compos,
+            'checklists'=>$checklists
+    
+        ]);
+
+   
+    }
+
 
 }

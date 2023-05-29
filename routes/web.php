@@ -98,3 +98,6 @@ Route::get('/addcomponent_to_reparation', [App\Http\Controllers\ReparationContro
 Route::get('/addcheck_to_reparation', [App\Http\Controllers\ReparationController::class, 'addcheck_to_reparation'])->name('addcheck_to_reparation')->middleware("auth");
 Route::get('/rechercher-reparations', [App\Http\Controllers\ReparationController::class, 'rechercher'])->name('rechercher')->middleware("auth");
 Route::get('/rechercher-ventes', [App\Http\Controllers\ReparationController::class, 'recherchervente'])->name('recherchervente')->middleware("auth");
+
+
+Route::get('/reparation_client/{id}', [App\Http\Controllers\ReparationController::class, 'reparation_client'])->name('reparation_client')->middleware("auth");
