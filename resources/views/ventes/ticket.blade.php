@@ -12,9 +12,9 @@
         margin-bottom: 0px;
         
          margin-left: 18px;
+         font-size: 10px;
 
     }
-    
 
 </style>    
 
