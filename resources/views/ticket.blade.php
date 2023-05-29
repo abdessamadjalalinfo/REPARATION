@@ -54,7 +54,7 @@
                     <p><strong>Modelo:</strong>{{$reparation->modele->nom}}</p>
                     <p><strong>Premio de los componentes:</strong>{{$reparation->price_components}} €</p>
                     <p><strong>Coste estimado:</strong>{{$reparation->prix}}€ </p>
-
+                    <p><strong>para consultar el seguimiento de la reparación consulta este enlace: </strong> {{route('reparation_client',$reparation->id)}} </p>
                     <p><strong>------------------------------------</strong></p>
                     <p><strong 
 >{{$store->email}}</strong> </p>
