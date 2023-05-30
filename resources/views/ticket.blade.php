@@ -41,11 +41,12 @@
                 <p> </p>
                     <p><strong>------------------------------------</strong></p>
                     <p><strong>ID</strong> R-{{$reparation->id}}</p>
-
+@if($reparation->client->id != 1)
                     <p><strong>Nombre</strong> {{$reparation->client->nom}}{{$reparation->client->prenom}}</p>
                     <p><strong>NIF/CIF:</strong> {{$reparation->client->dni}}</p>
                     <p><strong>Teléfono:</strong> {{$reparation->client->phone}}</p>
                     <p><strong>Dirección:</strong>{{$reparation->client->adresse}}</p>
+@endif
                     <p><strong>------------------------------------</strong></p>
                     <p><strong>Fecha</strong> {{$reparation->created_at}}</p>
                     <p><strong>Tipo:</strong> {{$reparation->categorie->nom}}</p>
